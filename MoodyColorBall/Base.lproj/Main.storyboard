@@ -31,47 +31,69 @@
                                 <rect key="frame" x="102" y="25" width="85" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redRing" translatesAutoresizingMaskIntoConstraints="NO" id="8L9-oq-rvQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="redRing" translatesAutoresizingMaskIntoConstraints="NO" id="8L9-oq-rvQ">
                                 <rect key="frame" x="188" y="25" width="85" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yellowRing" translatesAutoresizingMaskIntoConstraints="NO" id="t2C-65-IuX">
                                 <rect key="frame" x="274" y="25" width="85" height="85"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="titleTextImg" translatesAutoresizingMaskIntoConstraints="NO" id="m4s-5Y-nkj">
-                                <rect key="frame" x="16" y="168" width="343" height="170"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="titleTextImg" translatesAutoresizingMaskIntoConstraints="NO" id="m4s-5Y-nkj">
+                                <rect key="frame" x="18" y="168" width="339" height="170"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="TUa-u1-hU6">
-                                <rect key="frame" x="162" y="443" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="TUa-u1-hU6">
+                                <rect key="frame" x="162" y="425" width="53" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fwr-cw-zTJ"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get the ball into the same color ring!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPN-HW-wSK">
-                                <rect key="frame" x="16" y="527" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the ball into the same color ring!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPN-HW-wSK">
+                                <rect key="frame" x="19" y="509" width="339" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="eE5-3P-ydP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="18"/>
                                 <color key="textColor" red="0.79607843137254897" green="0.79607843137254897" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bar" translatesAutoresizingMaskIntoConstraints="NO" id="30W-wm-ikn">
-                                <rect key="frame" x="50" y="556" width="275" height="13"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar" translatesAutoresizingMaskIntoConstraints="NO" id="30W-wm-ikn">
+                                <rect key="frame" x="50" y="538" width="276" height="13"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hand" translatesAutoresizingMaskIntoConstraints="NO" id="GXg-9o-cus">
-                                <rect key="frame" x="300" y="568" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand" translatesAutoresizingMaskIntoConstraints="NO" id="GXg-9o-cus">
+                                <rect key="frame" x="301" y="550" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="9L2-Fm-Yz6"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="facebookIcon" translatesAutoresizingMaskIntoConstraints="NO" id="heQ-WW-8ae">
-                                <rect key="frame" x="125" y="598" width="42" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebookIcon" translatesAutoresizingMaskIntoConstraints="NO" id="heQ-WW-8ae">
+                                <rect key="frame" x="125" y="591" width="42" height="42"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="starIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mam-ag-CyJ">
-                                <rect key="frame" x="209" y="598" width="42" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mam-ag-CyJ">
+                                <rect key="frame" x="209" y="591" width="42" height="42"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DPN-HW-wSK" firstAttribute="top" secondItem="TUa-u1-hU6" secondAttribute="bottom" constant="34" id="3Xa-Fg-75D"/>
+                            <constraint firstItem="8Gk-5X-Hek" firstAttribute="bottom" secondItem="heQ-WW-8ae" secondAttribute="bottom" constant="34" id="A4l-1s-i9i"/>
+                            <constraint firstItem="heQ-WW-8ae" firstAttribute="bottom" secondItem="mam-ag-CyJ" secondAttribute="bottom" id="Cdj-mQ-hmE"/>
+                            <constraint firstItem="heQ-WW-8ae" firstAttribute="top" secondItem="mam-ag-CyJ" secondAttribute="top" id="DH5-uC-BC0"/>
+                            <constraint firstItem="8Gk-5X-Hek" firstAttribute="bottom" secondItem="GXg-9o-cus" secondAttribute="bottom" constant="92" id="GBD-3S-2cC"/>
+                            <constraint firstItem="heQ-WW-8ae" firstAttribute="leading" secondItem="8Gk-5X-Hek" secondAttribute="leading" constant="125" id="KX8-Hu-5sQ"/>
+                            <constraint firstItem="mam-ag-CyJ" firstAttribute="centerX" secondItem="8L9-oq-rvQ" secondAttribute="centerX" id="SCk-2W-X1P"/>
+                            <constraint firstItem="TUa-u1-hU6" firstAttribute="leading" secondItem="8Gk-5X-Hek" secondAttribute="leading" constant="162" id="SUN-7V-S3l"/>
+                            <constraint firstItem="30W-wm-ikn" firstAttribute="trailing" secondItem="GXg-9o-cus" secondAttribute="trailing" id="TYt-fj-9ey"/>
+                            <constraint firstItem="30W-wm-ikn" firstAttribute="top" secondItem="DPN-HW-wSK" secondAttribute="bottom" constant="8" symbolic="YES" id="UBb-IL-AQj"/>
+                            <constraint firstItem="TUa-u1-hU6" firstAttribute="centerX" secondItem="DPN-HW-wSK" secondAttribute="centerX" id="ZlT-5f-OoG"/>
+                            <constraint firstItem="DPN-HW-wSK" firstAttribute="centerX" secondItem="30W-wm-ikn" secondAttribute="centerX" id="i0s-Xg-iYg"/>
+                            <constraint firstItem="heQ-WW-8ae" firstAttribute="top" secondItem="30W-wm-ikn" secondAttribute="bottom" constant="40" id="i6L-gB-m8a"/>
+                            <constraint firstItem="mam-ag-CyJ" firstAttribute="leading" secondItem="heQ-WW-8ae" secondAttribute="trailing" constant="42" id="ivM-8w-Q9f"/>
+                            <constraint firstItem="TUa-u1-hU6" firstAttribute="top" secondItem="m4s-5Y-nkj" secondAttribute="bottom" constant="87" id="mSd-t3-c57"/>
+                            <constraint firstItem="GXg-9o-cus" firstAttribute="top" secondItem="DPN-HW-wSK" secondAttribute="bottom" constant="20" id="rR8-i6-JVG"/>
+                            <constraint firstItem="30W-wm-ikn" firstAttribute="centerX" secondItem="m4s-5Y-nkj" secondAttribute="centerX" id="s0Q-3B-ddE"/>
+                            <constraint firstItem="30W-wm-ikn" firstAttribute="centerX" secondItem="g9q-Z6-SRS" secondAttribute="centerX" id="sUw-h4-Vjo"/>
+                            <constraint firstItem="DPN-HW-wSK" firstAttribute="leading" secondItem="8Gk-5X-Hek" secondAttribute="leading" constant="19" id="wWc-Ue-ifA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8Gk-5X-Hek"/>
                     </view>
                 </viewController>
@@ -92,6 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="177" y="148"/>
         </scene>
     </scenes>
     <resources>

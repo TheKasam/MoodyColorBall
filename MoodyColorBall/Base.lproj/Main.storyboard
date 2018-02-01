@@ -155,7 +155,7 @@
         <image name="facebookIcon" width="42" height="42"/>
         <image name="greenRing" width="79" height="40"/>
         <image name="hand" width="25" height="27"/>
-        <image name="redRing" width="79" height="40"/>
+        <image name="redRing" width="79" height="42"/>
         <image name="starIcon" width="42" height="42"/>
         <image name="titleTextImg" width="339" height="167"/>
         <image name="yellowRing" width="79" height="41"/>

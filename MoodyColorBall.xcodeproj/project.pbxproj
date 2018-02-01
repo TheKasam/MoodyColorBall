@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		7369EEA1202292B7007F9BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEA0202292B7007F9BC1 /* AppDelegate.swift */; };
-		7369EEA7202292B7007F9BC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEA6202292B7007F9BC1 /* GameScene.swift */; };
 		7369EEA9202292B7007F9BC1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEA8202292B7007F9BC1 /* GameViewController.swift */; };
 		7369EEAC202292B7007F9BC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAA202292B7007F9BC1 /* Main.storyboard */; };
 		7369EEAE202292B7007F9BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAD202292B7007F9BC1 /* Assets.xcassets */; };
 		7369EEB1202292B7007F9BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */; };
+		7369EEE92022AA05007F9BC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEE82022AA05007F9BC1 /* GameScene.swift */; };
+		7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7369EE9D202292B7007F9BC1 /* MoodyColorBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodyColorBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7369EEA0202292B7007F9BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7369EEA6202292B7007F9BC1 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		7369EEA8202292B7007F9BC1 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		7369EEAB202292B7007F9BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7369EEAD202292B7007F9BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7369EEB0202292B7007F9BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7369EEB2202292B7007F9BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7369EEE82022AA05007F9BC1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = ../../SpriteKitSampleGame/SpriteKitSampleGame/GameScene.swift; sourceTree = "<group>"; };
+		7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				7369EEA0202292B7007F9BC1 /* AppDelegate.swift */,
-				7369EEA6202292B7007F9BC1 /* GameScene.swift */,
 				7369EEA8202292B7007F9BC1 /* GameViewController.swift */,
+				7369EEE82022AA05007F9BC1 /* GameScene.swift */,
+				7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */,
 				7369EEAA202292B7007F9BC1 /* Main.storyboard */,
 				7369EEAD202292B7007F9BC1 /* Assets.xcassets */,
 				7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */,
@@ -139,8 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7369EEA7202292B7007F9BC1 /* GameScene.swift in Sources */,
+				7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */,
 				7369EEA9202292B7007F9BC1 /* GameViewController.swift in Sources */,
+				7369EEE92022AA05007F9BC1 /* GameScene.swift in Sources */,
 				7369EEA1202292B7007F9BC1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

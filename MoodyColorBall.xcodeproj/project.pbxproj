@@ -63,12 +63,12 @@
 				7369EEA0202292B7007F9BC1 /* AppDelegate.swift */,
 				7369EEA8202292B7007F9BC1 /* GameViewController.swift */,
 				7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */,
+				7392592F2023D3E7007FAA72 /* GameScene.swift */,
 				7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */,
 				7369EEAA202292B7007F9BC1 /* Main.storyboard */,
 				7369EEAD202292B7007F9BC1 /* Assets.xcassets */,
 				7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */,
 				7369EEB2202292B7007F9BC1 /* Info.plist */,
-				7392592F2023D3E7007FAA72 /* GameScene.swift */,
 			);
 			path = MoodyColorBall;
 			sourceTree = "<group>";

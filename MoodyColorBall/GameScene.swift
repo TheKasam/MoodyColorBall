@@ -105,15 +105,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         editMonster(monster: monster3I, position: CGPoint(x:  (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: size.height - 2 * monster1I.size.height),name:"redRing")
         editMonster(monster: monster4I, position: CGPoint(x:   (monster1I.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1I.size.height),name:"yellowRing")
         
-        let wait = SKAction.wait(forDuration: 2.0)
+        let wait = SKAction.wait(forDuration: 3.0)
         
         let repeatPointer = SKAction.repeatForever(
             SKAction.sequence([ SKAction.run(runPointer),wait ])
         )
         
         run(SKAction.sequence([repeatPointer]))
-        
-        
         
     }
     
@@ -129,7 +127,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         addChild(monster)
     }
     
-    
+    //shuffels Ring Array and returns
     func shuffleArray() -> [String]{
         var ringArray = ["redRing","blueRing","yellowRing","greenRing"]
         var shuffledRingArray = [String]();
@@ -144,6 +142,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         return shuffledRingArray
         
     }
+    
+    //shuffel and updates RingArray
+    func updateShuffleArray(){
+        self.shuffledRingArray = shuffleArray()
+        print("arr",self.shuffledRingArray)
+    }
+    
     func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
@@ -153,10 +158,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     
-    func updateShuffleArray(){
-        self.shuffledRingArray = shuffleArray()
-        print("arr",self.shuffledRingArray)
-    }
+    //select's the color of the ball
     func setBallProperty() {
         //        self.player.userData = ["imageName" : player.texture.image]
         if let imageName = self.player.userData?["imageName"] as? String {
@@ -164,16 +166,54 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
     }
     
+    //moves pointer left and right on main screen
     func runPointer() {
         
-        let actualDuration =  1.0
+        let actualDuration =  1.5
         let actionMove = SKAction.move(to: CGPoint(x: ((size.width - touchBar.size.width)/2) , y: size.height * 0.17), duration: TimeInterval(actualDuration))
         let actionMove2 = SKAction.move(to: CGPoint(x: size.width - ((size.width - touchBar.size.width)/2) , y: size.height * 0.17), duration: TimeInterval(actualDuration))
         pointer.run(SKAction.sequence([actionMove, actionMove2]))
         
         
+    }
+    
+    //makes block
+    
+    func block(){
+        
+        let monster = SKSpriteNode(imageNamed: "block")
+        monster.userData = ["imageName" : "block"]
+        
+        //physics properties
+        monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
+        monster.physicsBody?.isDynamic = true // 2
+        monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
+        monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
+        monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+        let actualX = random(min: monster.size.width/2 + 16, max: size.height - monster.size.width/2 - 16)
+
+        //position
+        monster.position = CGPoint(x: size.width - 16 , y: size.height + monster.size.height/2)
+        
+        // Add the monster to the scene
+        addChild(monster)
+
+        // Determine speed of the monster
+        let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
+        
+        // Create the actions
+        let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2), duration: TimeInterval(actualDuration))
+        
+        let actionDone = SKAction.move(to: CGPoint(x: size.width - 16 , y: 0), duration: TimeInterval(actualDuration))
+        
+        let actionMoveDone = SKAction.removeFromParent()
+        
+        
+        monster.run(SKAction.sequence([actionMove, actionDone, actionMoveDone]))
         
     }
+    
+    //makes ring sprites
     func ring1() {
         
         
@@ -343,6 +383,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        //logic to only start running once
         if self.initalRun == false{
             
             //removing elements
@@ -354,22 +395,30 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             fbIcon.removeFromParent()
             
             //starting game
-            let wait = SKAction.wait(forDuration: 0.5)
+            let wait = SKAction.wait(forDuration: 1.5)
             
             let repeatRun = SKAction.repeatForever(
                 SKAction.sequence([
-                    SKAction.run(runPointer),
                     SKAction.run(setBallProperty),
                     SKAction.run(ring1),
                     SKAction.run(ring2),
                     SKAction.run(ring3),
                     SKAction.run(ring4),
                     SKAction.run(updateShuffleArray),
-                    SKAction.wait(forDuration: 1.0)
+                    SKAction.wait(forDuration: 1.8)
                     ]))
             
             
             run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
+            
+            //running block
+            let repeatBlock = SKAction.repeatForever(
+                SKAction.sequence([
+                    SKAction.run(block),
+                    SKAction.wait(forDuration: 1.8)
+                    ]))
+            run(SKAction.sequence([repeatBlock]))
+
             self.initalRun = true
         }
         

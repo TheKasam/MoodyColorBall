@@ -14,6 +14,7 @@
 		7369EEB1202292B7007F9BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */; };
 		7369EEE92022AA05007F9BC1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEE82022AA05007F9BC1 /* GameScene.swift */; };
 		7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */; };
+		7369EEED2022EA3D007F9BC1 /* HomeViewContollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7369EEB2202292B7007F9BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7369EEE82022AA05007F9BC1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = ../../SpriteKitSampleGame/SpriteKitSampleGame/GameScene.swift; sourceTree = "<group>"; };
 		7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContollerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				7369EEA0202292B7007F9BC1 /* AppDelegate.swift */,
 				7369EEA8202292B7007F9BC1 /* GameViewController.swift */,
+				7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */,
 				7369EEE82022AA05007F9BC1 /* GameScene.swift */,
 				7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */,
 				7369EEAA202292B7007F9BC1 /* Main.storyboard */,
@@ -144,6 +147,7 @@
 			files = (
 				7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */,
 				7369EEA9202292B7007F9BC1 /* GameViewController.swift in Sources */,
+				7369EEED2022EA3D007F9BC1 /* HomeViewContollerViewController.swift in Sources */,
 				7369EEE92022AA05007F9BC1 /* GameScene.swift in Sources */,
 				7369EEA1202292B7007F9BC1 /* AppDelegate.swift in Sources */,
 			);

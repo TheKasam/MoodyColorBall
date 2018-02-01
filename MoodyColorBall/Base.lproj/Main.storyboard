@@ -17,14 +17,19 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Contoller View Controller-->
         <scene sceneID="oWd-aS-m5h">
             <objects>
-                <viewController id="l2q-FV-Z5I" sceneMemberID="viewController">
+                <viewController id="l2q-FV-Z5I" customClass="HomeViewContollerViewController" customModule="MoodyColorBall" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g9q-Z6-SRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vmb-Tb-ndh">
+                                <rect key="frame" x="0.0" y="531" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.611083984375" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueRing" translatesAutoresizingMaskIntoConstraints="NO" id="P2Y-ay-J9J">
                                 <rect key="frame" x="16" y="25" width="85" height="85"/>
                                 <constraints>
@@ -59,7 +64,7 @@
                                     <constraint firstAttribute="height" constant="170" id="cFF-BT-25M"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="TUa-u1-hU6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueBall" translatesAutoresizingMaskIntoConstraints="NO" id="TUa-u1-hU6">
                                 <rect key="frame" x="162" y="425" width="53" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="53" id="svU-Gl-gBY"/>
@@ -90,14 +95,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mam-ag-CyJ">
                                 <rect key="frame" x="209" y="591" width="42" height="42"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3H-cV-54t">
-                                <rect key="frame" x="165" y="369" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="presentation" modalTransitionStyle="crossDissolve" id="pMf-Hp-6BO"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -135,6 +132,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Gk-5X-Hek"/>
                     </view>
+                    <connections>
+                        <outlet property="viewToTouch" destination="Vmb-Tb-ndh" id="JOb-6I-mHF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfd-xQ-Qfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,7 +143,7 @@
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="MoodyColorBall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gameID" id="BV1-FR-VrT" customClass="GameViewController" customModule="MoodyColorBall" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,8 +157,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ball" width="48" height="48"/>
         <image name="bar" width="276" height="6"/>
+        <image name="blueBall" width="48" height="48"/>
         <image name="blueRing" width="79" height="42"/>
         <image name="facebookIcon" width="42" height="42"/>
         <image name="greenRing" width="79" height="40"/>

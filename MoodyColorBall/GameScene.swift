@@ -202,7 +202,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
         
         // Create the actions
-        let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2), duration: TimeInterval(actualDuration))
+        let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2  + 100), duration: TimeInterval(actualDuration))
         
         let actionDone = SKAction.move(to: CGPoint(x: size.width - 16 , y: 0), duration: TimeInterval(actualDuration))
         

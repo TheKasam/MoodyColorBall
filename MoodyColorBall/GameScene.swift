@@ -553,7 +553,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             
         }
+        if let continueNode = childNode(withName: "continueCir"){
+            if continueNode.contains(touchLocation){
+                print("continue")
+                timeOut()
+                scene?.view?.isPaused = false
 
+            }
+        }
+    
         
 
         
@@ -609,7 +617,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 //            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
 //            let gameOverScene = GameOverScene(size: self.size, won: false)
 //            self.view?.presentScene(gameOverScene, transition: reveal)
-            func createGradientLayer() {
+            func backGroundRect() {
                 let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
                 rectLayer.name = "bar"
                 rectLayer.fillColor = colorStart//SKColor.black
@@ -621,8 +629,19 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
                 self.addChild(rectLayer)
             }
-            createGradientLayer()
-            
+            func continueCircle() {
+                let circle = SKShapeNode(circleOfRadius: 100)
+                circle.name = "bar"
+                circle.fillColor = SKColor.white
+                circle.position = CGPoint(x: size.width/2 , y: size.height/2)
+                circle.zPosition = 101
+                circle.name = "continueCir"
+
+                
+                self.addChild(circle)
+            }
+            backGroundRect()
+            continueCircle()
         }
         
         

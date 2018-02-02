@@ -627,7 +627,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var collide = true
     func timeOut(){
         self.collide = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
             // Put your code which should be executed with a delay here
             self.collide = true
         })

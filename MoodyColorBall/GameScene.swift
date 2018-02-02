@@ -190,16 +190,77 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
         monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
-        let actualX = random(min: monster.size.width/2 + 16, max: size.height - monster.size.width/2 - 16)
-
+        
+        var pointsArray = [SKAction]()
+        
+        
+        let startX = random(min: monster.size.width/2 + 16, max: size.width - monster.size.width/2 - 16)
+        
         //position
-        monster.position = CGPoint(x: size.width - 16 , y: size.height + monster.size.height/2)
+        monster.position = CGPoint(x: startX , y: size.height + monster.size.height/2)
+
+        
+        
+        let intSpeed = 100 //pixils / sec
+        
+        
+        
+        let screenWidth = size.width
+        let screenHeight = size.height
+        let intPoints = 4
+        
+        let section = screenHeight / CGFloat(intPoints)
+        
+        let initialSectionYLength =  screenHeight - ((startX / screenWidth) * section)
+        
+        print("init",initialSectionYLength)
+        
+        let initialTime =  (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
+        
+        
+        let initalAction = SKAction.move(to: CGPoint(x: 16 , y: initialSectionYLength), duration: TimeInterval(initialTime))
+        pointsArray.append(initalAction)
+        
+        
+        let finalTime = (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
+        let finalAction = SKAction.move(to: CGPoint(x: 16 , y: screenHeight - initialSectionYLength), duration: TimeInterval(finalTime))
+        
+        let regualarTime =  (section)  / CGFloat(intSpeed)
+
+        // Determine speed of the monster
+        let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
+        
+        
+        var left = true
+        var yDist = initialSectionYLength
+        for _ in 0 ..< (intPoints - 1){
+            if left == true{
+                
+                let action = SKAction.move(to: CGPoint(x: 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
+                yDist -= section
+                pointsArray.append(action)
+                left = false
+                
+            } else {
+                let action = SKAction.move(to: CGPoint(x: screenWidth - 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
+                
+                yDist -= section
+                
+                pointsArray.append(action)
+                left = true
+                
+            }
+        }
+        
+        
+        pointsArray.append(finalAction)
+
+
         
         // Add the monster to the scene
         addChild(monster)
 
-        // Determine speed of the monster
-        let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
+       
         
         // Create the actions
         let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2  + 100), duration: TimeInterval(actualDuration))
@@ -207,9 +268,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let actionDone = SKAction.move(to: CGPoint(x: size.width - 16 , y: 0), duration: TimeInterval(actualDuration))
         
         let actionMoveDone = SKAction.removeFromParent()
+        pointsArray.append(actionMoveDone)
         
-        
-        monster.run(SKAction.sequence([actionMove, actionDone, actionMoveDone]))
+        monster.run(SKAction.sequence(pointsArray))
         
     }
     

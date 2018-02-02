@@ -681,9 +681,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(rectLayer)
         }
         func continueCircle() {
-            let circle = SKShapeNode(circleOfRadius: 100)
+            let circle = SKShapeNode(circleOfRadius: 67)
             circle.name = "bar"
-            circle.fillColor = SKColor.white
+            circle.fillColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+
             circle.position = CGPoint(x: size.width/2 , y: size.height/2)
             circle.zPosition = 101
             circle.name = "continueCir"
@@ -691,9 +692,22 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(circle)
         }
         
+        func continueLabel(){
+            
+            let continueLabel = SKSpriteNode(imageNamed: "CONTINUE PLAYING?")
+
+
+            continueLabel.zPosition = 102
+            continueLabel.position = CGPoint(x: size.width/2 , y: size.height/2)
+
+            continueLabel.name = "continueLabel"
+            names.append("continueLabel")
+            self.addChild(continueLabel)
+        }
+        
         backGroundRect()
         continueCircle()
-        
+        continueLabel()
     }
     
     func removeContinueScreen(){
@@ -705,4 +719,5 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     
 }
+
 

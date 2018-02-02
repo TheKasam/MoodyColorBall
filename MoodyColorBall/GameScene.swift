@@ -20,8 +20,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var shuffledRingArray = ["blueRing","greenRing","redRing","yellowRing"]
     var score = 0
     var touch: UITouch?
-    let ringSpeeed = CGFloat(2.0)
-    let ringSpeeed2 = CGFloat(1.75)
+    let ringSpeeed = CGFloat(1.8)
+    let ringSpeeed2 = CGFloat(1.6)
     var initalRun = false
     
     //game nodes
@@ -183,93 +183,93 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         let monster = SKSpriteNode(imageNamed: "block")
         monster.userData = ["imageName" : "block"]
-        
+
         //physics properties
         monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
         monster.physicsBody?.isDynamic = true // 2
         monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
         monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
-        
+
         var pointsArray = [SKAction]()
-        
-        
+
+
         let startX = random(min: monster.size.width/2 + 16, max: size.width - monster.size.width/2 - 16)
-        
+
         //position
         monster.position = CGPoint(x: startX , y: size.height + monster.size.height/2)
 
-        
-        
-        let intSpeed = 100 //pixils / sec
-        
-        
-        
+
+
+        let intSpeed = size.height / ringSpeeed
+
+
+
         let screenWidth = size.width
         let screenHeight = size.height
-        let intPoints = 4
-        
+        let intPoints = 2
+
         let section = screenHeight / CGFloat(intPoints)
-        
+
         let initialSectionYLength =  screenHeight - ((startX / screenWidth) * section)
-        
+
         print("init",initialSectionYLength)
-        
+
         let initialTime =  (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
-        
-        
+
+
         let initalAction = SKAction.move(to: CGPoint(x: 16 , y: initialSectionYLength), duration: TimeInterval(initialTime))
         pointsArray.append(initalAction)
-        
-        
-        let finalTime = (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
-        let finalAction = SKAction.move(to: CGPoint(x: 16 , y: screenHeight - initialSectionYLength), duration: TimeInterval(finalTime))
-        
+
+
+
+
         let regualarTime =  (section)  / CGFloat(intSpeed)
 
         // Determine speed of the monster
         let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
-        
-        
-        var left = true
+
+
+        var left = false
         var yDist = initialSectionYLength
-        for _ in 0 ..< (intPoints - 1){
+        for _ in 0 ..< (intPoints){
             if left == true{
-                
+
                 let action = SKAction.move(to: CGPoint(x: 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
                 yDist -= section
                 pointsArray.append(action)
                 left = false
-                
+
             } else {
                 let action = SKAction.move(to: CGPoint(x: screenWidth - 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
-                
+
                 yDist -= section
-                
+
                 pointsArray.append(action)
                 left = true
-                
+
             }
         }
-        
-        
+
+        let finalTime = (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
+        let finalAction = SKAction.move(to: CGPoint(x:  16 , y: yDist), duration: TimeInterval(finalTime))
         pointsArray.append(finalAction)
 
 
-        
+
         // Add the monster to the scene
         addChild(monster)
 
-       
-        
+
+
         // Create the actions
         let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2  + 100), duration: TimeInterval(actualDuration))
-        
+
         let actionDone = SKAction.move(to: CGPoint(x: size.width - 16 , y: 0), duration: TimeInterval(actualDuration))
-        
+
         let actionMoveDone = SKAction.removeFromParent()
         pointsArray.append(actionMoveDone)
-        
+
         monster.run(SKAction.sequence(pointsArray))
         
     }
@@ -456,7 +456,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             fbIcon.removeFromParent()
             
             //starting game
-            let wait = SKAction.wait(forDuration: 1.5)
+            let wait = SKAction.wait(forDuration: 1.1)
             
             let repeatRun = SKAction.repeatForever(
                 SKAction.sequence([
@@ -466,7 +466,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     SKAction.run(ring3),
                     SKAction.run(ring4),
                     SKAction.run(updateShuffleArray),
-                    SKAction.wait(forDuration: 1.8)
+                    SKAction.wait(forDuration: 1.3)
                     ]))
             
             
@@ -476,9 +476,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let repeatBlock = SKAction.repeatForever(
                 SKAction.sequence([
                     SKAction.run(block),
-                    SKAction.wait(forDuration: 1.8)
+                    SKAction.wait(forDuration: 1.3)
                     ]))
-            run(SKAction.sequence([repeatBlock]))
+            let wait2 = SKAction.wait(forDuration: 0.45)
+
+            run(SKAction.sequence([wait2,repeatBlock]))
 
             self.initalRun = true
         }

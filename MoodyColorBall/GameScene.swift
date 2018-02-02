@@ -55,12 +55,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //adding player data and physics
         player.userData = ["imageName" : "redBall"]
         
-        player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
         player.physicsBody?.isDynamic = true
         player.physicsBody?.categoryBitMask = PhysicsCategory.Player
         player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
         player.physicsBody?.collisionBitMask = PhysicsCategory.None
         player.position = CGPoint(x: size.width/2, y: size.height * 0.3)
+        player.physicsBody?.usesPreciseCollisionDetection = true
+
         addChild(player)
         
         
@@ -541,12 +543,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.position = touchLocation
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
             
-            player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+            player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
             player.physicsBody?.isDynamic = true
             player.physicsBody?.categoryBitMask = PhysicsCategory.Player
             player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
             player.physicsBody?.collisionBitMask = PhysicsCategory.None
-            //        player.physicsBody?.usesPreciseCollisionDetection = true
+                    player.physicsBody?.usesPreciseCollisionDetection = true
             
             
             
@@ -576,12 +578,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.position = touchLocation
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
             
-            player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+            player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
             player.physicsBody?.isDynamic = true
             player.physicsBody?.categoryBitMask = PhysicsCategory.Player
             player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
             player.physicsBody?.collisionBitMask = PhysicsCategory.None
-            //        player.physicsBody?.usesPreciseCollisionDetection = true
+            player.physicsBody?.usesPreciseCollisionDetection = true
             
             
         }
@@ -602,12 +604,27 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 //            run( SKAction.sequence([SKAction.run({self.addChild(monster)})]))
             
         } else {
-//            scene?.view?.isPaused = true
-            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-            let gameOverScene = GameOverScene(size: self.size, won: false)
-            self.view?.presentScene(gameOverScene, transition: reveal)
+            scene?.view?.isPaused = true
+            var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
+//            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//            let gameOverScene = GameOverScene(size: self.size, won: false)
+//            self.view?.presentScene(gameOverScene, transition: reveal)
+            func createGradientLayer() {
+                let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
+                rectLayer.name = "bar"
+                rectLayer.fillColor = colorStart//SKColor.black
+                rectLayer.position = CGPoint(x: size.width/2 , y: size.height/2)
+                rectLayer.alpha = 0.8
+                rectLayer.zPosition = 100
+                rectLayer.isAntialiased = false
+                rectLayer.lineWidth = 0.01;
+
+                self.addChild(rectLayer)
+            }
+            createGradientLayer()
             
         }
+        
         
     }
     

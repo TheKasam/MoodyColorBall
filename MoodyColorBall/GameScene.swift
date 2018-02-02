@@ -195,7 +195,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         let randomNum = arc4random_uniform(_:2)
         
-        let intPoints = 3
+        let intPoints = 1
         
         if randomNum == 1{
             
@@ -573,7 +573,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             label.text = String(self.score)
-            monster.removeFromParent()
+//            monster.removeFromParent()
+//            run( SKAction.sequence([SKAction.run({self.addChild(monster)})]))
+            
         } else {
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
             let gameOverScene = GameOverScene(size: self.size, won: false)
@@ -583,28 +585,43 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
     }
     
+    var collide = true
+    func timeOut(){
+        self.collide = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+            // Put your code which should be executed with a delay here
+            self.collide = true
+        })
+        
+    }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-//        // 1
-//        var firstBody: SKPhysicsBody
-//        var secondBody: SKPhysicsBody
-//        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-//            firstBody = contact.bodyA
-//            secondBody = contact.bodyB
-//        } else {
-//            firstBody = contact.bodyB
-//            secondBody = contact.bodyA
-//        }
-//
-//        // 2
-//        if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
-//            (secondBody.categoryBitMask & PhysicsCategory.Player != 0)) {
-//            if let monster = firstBody.node as? SKSpriteNode, let
-//                player = secondBody.node as? SKSpriteNode {
-//                projectileDidCollideWithMonster(projectile: player, monster: monster)
-//            }
-//        }
+        // 1
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+
+        // 2
+        if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Player != 0)) {
+            if let monster = firstBody.node as? SKSpriteNode, let
+                player = secondBody.node as? SKSpriteNode {
+                
+                if self.collide == true{
+                    projectileDidCollideWithMonster(projectile: player, monster: monster)
+                    timeOut()
+                    
+                }
+            }
+        }
         
     }
     

@@ -477,48 +477,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        //logic to only start running once
-        if self.initalRun == false{
-            
-            addChild(label)
 
-            //removing elements
-            touchBar.removeFromParent()
-            titleText.removeFromParent()
-            directionLbl.removeFromParent()
-            pointer.removeFromParent()
-            starIcon.removeFromParent()
-            fbIcon.removeFromParent()
-            
-            //starting game
-            let wait = SKAction.wait(forDuration: 1.1)
-            
-            let repeatRun = SKAction.repeatForever(
-                SKAction.sequence([
-                    SKAction.run(setBallProperty),
-                    SKAction.run(ring1),
-                    SKAction.run(ring2),
-                    SKAction.run(ring3),
-                    SKAction.run(ring4),
-                    SKAction.run(updateShuffleArray),
-                    SKAction.wait(forDuration: 1.3)
-                    ]))
-            
-            
-            run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
-            
-            //running block
-            let repeatBlock = SKAction.repeatForever(
-                SKAction.sequence([
-                    SKAction.run(block),
-                    SKAction.wait(forDuration: 1.3)
-                    ]))
-            let wait2 = SKAction.wait(forDuration: 0.45)
-
-            run(SKAction.sequence([wait2,repeatBlock]))
-
-            self.initalRun = true
-        }
         
         
         // 1 - Choose one of the touches to work with
@@ -526,18 +485,75 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             return
         }
         let touchLocation = touch.location(in: self)
+       
+        if fbIcon.contains(touchLocation) {
+            print("fb touched")
+        } else if starIcon.contains(touchLocation){
+            print("star touched")
+        } else {
+            
+                //logic to only start running once
+                if self.initalRun == false{
+            
+                        addChild(label)
+            
+                        //removing elements
+                        touchBar.removeFromParent()
+                        titleText.removeFromParent()
+                        directionLbl.removeFromParent()
+                        pointer.removeFromParent()
+                        starIcon.removeFromParent()
+                        fbIcon.removeFromParent()
+            
+                        //starting game
+                        let wait = SKAction.wait(forDuration: 1.1)
+            
+                        let repeatRun = SKAction.repeatForever(
+                            SKAction.sequence([
+                                SKAction.run(setBallProperty),
+                                SKAction.run(ring1),
+                                SKAction.run(ring2),
+                                SKAction.run(ring3),
+                                SKAction.run(ring4),
+                                SKAction.run(updateShuffleArray),
+                                SKAction.wait(forDuration: 1.3)
+                                ]))
+            
+            
+                        run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
+            
+                        //running block
+                        let repeatBlock = SKAction.repeatForever(
+                            SKAction.sequence([
+                                SKAction.run(block),
+                                SKAction.wait(forDuration: 1.3)
+                                ]))
+                        let wait2 = SKAction.wait(forDuration: 0.45)
+            
+                        run(SKAction.sequence([wait2,repeatBlock]))
+            
+                        self.initalRun = true
+                    }
+
+            
+            // 2 - Set up initial location of projectile
+            //        let monster = SKSpriteNode(imageNamed: "monster")
+            player.position = touchLocation
+            player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
+            
+            player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+            player.physicsBody?.isDynamic = true
+            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
+            player.physicsBody?.collisionBitMask = PhysicsCategory.None
+            //        player.physicsBody?.usesPreciseCollisionDetection = true
+            
+            
+            
+        }
+
         
-        // 2 - Set up initial location of projectile
-        //        let monster = SKSpriteNode(imageNamed: "monster")
-        player.position = touchLocation
-        player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
-        
-        player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
-        player.physicsBody?.isDynamic = true
-        player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
-        player.physicsBody?.collisionBitMask = PhysicsCategory.None
-        //        player.physicsBody?.usesPreciseCollisionDetection = true
+
         
         
     }
@@ -550,17 +566,26 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
         let touchLocation = touch.location(in: self)
         
-        // 2 - Set up initial location of projectile
-        //        let monster = SKSpriteNode(imageNamed: "monster")
-        player.position = touchLocation
-        player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
+        if fbIcon.contains(touchLocation) {
+            print("fb touched")
+        } else if starIcon.contains(touchLocation){
+            print("star touched")
+        } else {
+            // 2 - Set up initial location of projectile
+            //        let monster = SKSpriteNode(imageNamed: "monster")
+            player.position = touchLocation
+            player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
+            
+            player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+            player.physicsBody?.isDynamic = true
+            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
+            player.physicsBody?.collisionBitMask = PhysicsCategory.None
+            //        player.physicsBody?.usesPreciseCollisionDetection = true
+            
+            
+        }
         
-        player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
-        player.physicsBody?.isDynamic = true
-        player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
-        player.physicsBody?.collisionBitMask = PhysicsCategory.None
-        //        player.physicsBody?.usesPreciseCollisionDetection = true
         
         
     }
@@ -577,6 +602,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 //            run( SKAction.sequence([SKAction.run({self.addChild(monster)})]))
             
         } else {
+//            scene?.view?.isPaused = true
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
             let gameOverScene = GameOverScene(size: self.size, won: false)
             self.view?.presentScene(gameOverScene, transition: reveal)

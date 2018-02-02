@@ -192,46 +192,35 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
         var pointsArray = [SKAction]()
 
-
+        
+        let randomNum = arc4random_uniform(_:2)
+        
+        let intPoints = 3
+        
+        if randomNum == 1{
+            
         let startX = random(min: monster.size.width/2 + 16, max: size.width - monster.size.width/2 - 16)
-
-        //position
         monster.position = CGPoint(x: startX , y: size.height + monster.size.height/2)
-
-
-
         let intSpeed = size.height / ringSpeeed
-
-
-
+        
         let screenWidth = size.width
         let screenHeight = size.height
-        let intPoints = 2
 
         let section = screenHeight / CGFloat(intPoints)
+            
 
         let initialSectionYLength =  screenHeight - ((startX / screenWidth) * section)
 
-        print("init",initialSectionYLength)
-
         let initialTime =  (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
-
-
         let initalAction = SKAction.move(to: CGPoint(x: 16 , y: initialSectionYLength), duration: TimeInterval(initialTime))
         pointsArray.append(initalAction)
 
-
-
-
         let regualarTime =  (section)  / CGFloat(intSpeed)
-
-        // Determine speed of the monster
-        let actualDuration =   ringSpeeed/2 //random(min: CGFloat(2.0), max: CGFloat(4.0))
-
+        
 
         var left = false
         var yDist = initialSectionYLength
-        for _ in 0 ..< (intPoints){
+        for _ in 0 ..< (intPoints ){
             if left == true{
 
                 let action = SKAction.move(to: CGPoint(x: 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
@@ -254,23 +243,67 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let finalAction = SKAction.move(to: CGPoint(x:  16 , y: yDist), duration: TimeInterval(finalTime))
         pointsArray.append(finalAction)
 
-
-
         // Add the monster to the scene
         addChild(monster)
-
-
-
-        // Create the actions
-        let actionMove = SKAction.move(to: CGPoint(x: 16 , y: size.height/2  + 100), duration: TimeInterval(actualDuration))
-
-        let actionDone = SKAction.move(to: CGPoint(x: size.width - 16 , y: 0), duration: TimeInterval(actualDuration))
-
         let actionMoveDone = SKAction.removeFromParent()
         pointsArray.append(actionMoveDone)
 
         monster.run(SKAction.sequence(pointsArray))
-        
+        } else {
+
+            
+            let startX = random(min: monster.size.width/2 + 16, max: size.width - monster.size.width/2 - 16)
+            monster.position = CGPoint(x: 16 , y: size.height + monster.size.height/2)
+            let intSpeed = size.height / ringSpeeed
+            
+            let screenWidth = size.width
+            let screenHeight = size.height
+            
+            let section = screenHeight / CGFloat(intPoints)
+            
+            
+            var initialSectionYLength =  screenHeight - ((startX / screenWidth) * section)
+            initialSectionYLength = size.height - section
+            let initialTime =  (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
+            let initalAction = SKAction.move(to: CGPoint(x: screenWidth - 16 , y:initialSectionYLength ), duration: TimeInterval(initialTime))
+            pointsArray.append(initalAction)
+            
+            let regualarTime =  (section)  / CGFloat(intSpeed)
+            
+            
+            var left = true
+            var yDist = initialSectionYLength
+            for _ in 0 ..< (intPoints ){
+                if left == true{
+                    
+                    let action = SKAction.move(to: CGPoint(x: 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
+                    yDist -= section
+                    pointsArray.append(action)
+                    left = false
+                    
+                } else {
+                    let action = SKAction.move(to: CGPoint(x: screenWidth - 16 , y:  yDist - section), duration: TimeInterval(regualarTime))
+                    
+                    yDist -= section
+                    
+                    pointsArray.append(action)
+                    left = true
+                    
+                }
+            }
+            
+//            let finalTime = (screenHeight - initialSectionYLength) / CGFloat(intSpeed)
+//            let finalAction = SKAction.move(to: CGPoint(x:  16 , y: yDist), duration: TimeInterval(finalTime))
+//            pointsArray.append(finalAction)
+            
+            // Add the monster to the scene
+            addChild(monster)
+            let actionMoveDone = SKAction.removeFromParent()
+            pointsArray.append(actionMoveDone)
+            
+            monster.run(SKAction.sequence(pointsArray))
+            
+        }
     }
     
     //makes ring sprites
@@ -304,9 +337,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         monster.run(SKAction.sequence([actionMove, actionMoveDone]))
         
+        }
         
         
-    }
+    
     
     func ring2() {
         
@@ -552,25 +586,25 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-        // 1
-        var firstBody: SKPhysicsBody
-        var secondBody: SKPhysicsBody
-        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        } else {
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        
-        // 2
-        if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
-            (secondBody.categoryBitMask & PhysicsCategory.Player != 0)) {
-            if let monster = firstBody.node as? SKSpriteNode, let
-                player = secondBody.node as? SKSpriteNode {
-                projectileDidCollideWithMonster(projectile: player, monster: monster)
-            }
-        }
+//        // 1
+//        var firstBody: SKPhysicsBody
+//        var secondBody: SKPhysicsBody
+//        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+//            firstBody = contact.bodyA
+//            secondBody = contact.bodyB
+//        } else {
+//            firstBody = contact.bodyB
+//            secondBody = contact.bodyA
+//        }
+//
+//        // 2
+//        if ((firstBody.categoryBitMask & PhysicsCategory.Monster != 0) &&
+//            (secondBody.categoryBitMask & PhysicsCategory.Player != 0)) {
+//            if let monster = firstBody.node as? SKSpriteNode, let
+//                player = secondBody.node as? SKSpriteNode {
+//                projectileDidCollideWithMonster(projectile: player, monster: monster)
+//            }
+//        }
         
     }
     

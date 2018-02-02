@@ -69,7 +69,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         label.fontSize = 30
         label.fontColor = SKColor.white
         label.position = CGPoint(x: size.width/2, y: size.height - label.fontSize - 30)
-        addChild(label)
         
         //creating directions label
         directionLbl.text = "Get the ball into the same colored ring!"
@@ -447,6 +446,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //logic to only start running once
         if self.initalRun == false{
             
+            addChild(label)
+
             //removing elements
             touchBar.removeFromParent()
             titleText.removeFromParent()

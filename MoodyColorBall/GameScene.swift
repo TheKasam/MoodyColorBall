@@ -556,6 +556,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if let continueNode = childNode(withName: "continueCir"){
             if continueNode.contains(touchLocation){
                 print("continue")
+                removeContinueScreen()
                 timeOut()
                 scene?.view?.isPaused = false
 
@@ -613,39 +614,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
         } else {
             scene?.view?.isPaused = true
-            var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
 //            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
 //            let gameOverScene = GameOverScene(size: self.size, won: false)
 //            self.view?.presentScene(gameOverScene, transition: reveal)
-            func backGroundRect() {
-                let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
-                rectLayer.name = "bar"
-                rectLayer.fillColor = colorStart//SKColor.black
-                rectLayer.position = CGPoint(x: size.width/2 , y: size.height/2)
-                rectLayer.alpha = 0.8
-                rectLayer.zPosition = 100
-                rectLayer.isAntialiased = false
-                rectLayer.lineWidth = 0.01;
-
-                self.addChild(rectLayer)
-            }
-            func continueCircle() {
-                let circle = SKShapeNode(circleOfRadius: 100)
-                circle.name = "bar"
-                circle.fillColor = SKColor.white
-                circle.position = CGPoint(x: size.width/2 , y: size.height/2)
-                circle.zPosition = 101
-                circle.name = "continueCir"
-
-                
-                self.addChild(circle)
-            }
-            backGroundRect()
-            continueCircle()
+            addContinueScreen()
         }
         
         
     }
+    
     
     var collide = true
     func timeOut(){
@@ -683,6 +660,45 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     
                 }
             }
+        }
+        
+    }
+    
+    var names = [String]()
+    func addContinueScreen() {
+        var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
+        func backGroundRect() {
+            let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
+            rectLayer.name = "bar"
+            rectLayer.fillColor = colorStart//SKColor.black
+            rectLayer.position = CGPoint(x: size.width/2 , y: size.height/2)
+            rectLayer.alpha = 0.8
+            rectLayer.zPosition = 100
+            rectLayer.isAntialiased = false
+            rectLayer.lineWidth = 0.01;
+            rectLayer.name = "continueBackground"
+            names.append("continueBackground")
+            self.addChild(rectLayer)
+        }
+        func continueCircle() {
+            let circle = SKShapeNode(circleOfRadius: 100)
+            circle.name = "bar"
+            circle.fillColor = SKColor.white
+            circle.position = CGPoint(x: size.width/2 , y: size.height/2)
+            circle.zPosition = 101
+            circle.name = "continueCir"
+            names.append("continueCir")
+            self.addChild(circle)
+        }
+        
+        backGroundRect()
+        continueCircle()
+        
+    }
+    
+    func removeContinueScreen(){
+        for name in names{
+            childNode(withName: name)?.removeFromParent()
         }
         
     }

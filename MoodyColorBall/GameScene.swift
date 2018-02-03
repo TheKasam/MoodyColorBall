@@ -666,6 +666,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     var names = [String]()
     func addContinueScreen() {
+        
+
+        
         var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
         func backGroundRect() {
             let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
@@ -680,6 +683,44 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("continueBackground")
             self.addChild(rectLayer)
         }
+        
+        func gameOverLabel(){
+            
+            let gameOverLabel = SKSpriteNode(imageNamed: "GAME OVER")
+            
+            
+            gameOverLabel.zPosition = 101
+            gameOverLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.9)
+            
+            gameOverLabel.name = "GAME OVER"
+            names.append("GAME OVER")
+            self.addChild(gameOverLabel)
+        }
+        
+        func scoreLbl(){
+            
+            let scoreLbl = SKSpriteNode(imageNamed: "Score")
+            
+            scoreLbl.zPosition = 101
+            scoreLbl.position = CGPoint(x: size.width/2 - 50 , y: size.height * 0.8)
+            
+            scoreLbl.name = "Score"
+            names.append("Score")
+            self.addChild(scoreLbl)
+        }
+        
+        func bestLbl(){
+            
+            let bestLbl = SKSpriteNode(imageNamed: "Best")
+            
+            bestLbl.zPosition = 101
+            bestLbl.position = CGPoint(x: size.width/2 - 45 , y: size.height * 0.73)
+            
+            bestLbl.name = "Best"
+            names.append("Best")
+            self.addChild(bestLbl)
+        }
+        
         func continueCircleBorder() {
             let circle = SKShapeNode(circleOfRadius: 70)
             circle.name = "bar"
@@ -720,6 +761,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
         
         backGroundRect()
+        gameOverLabel()
+        scoreLbl()
+        bestLbl()
         continueCircleBorder()
         continueCircle()
         continueLabel()

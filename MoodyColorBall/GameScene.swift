@@ -702,11 +702,28 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let scoreLbl = SKSpriteNode(imageNamed: "Score")
             
             scoreLbl.zPosition = 101
-            scoreLbl.position = CGPoint(x: size.width/2 - 50 , y: size.height * 0.8)
+            scoreLbl.position = CGPoint(x: size.width/2 - 40 , y: size.height * 0.8)
             
             scoreLbl.name = "Score"
             names.append("Score")
             self.addChild(scoreLbl)
+        }
+        
+        func cscoreLbl(){
+            
+            //creating score label
+            let cscoreLbl = SKLabelNode(fontNamed: "Hiragino Sans W3")
+            
+            cscoreLbl.text = String(score)
+            cscoreLbl.fontSize = 20
+            cscoreLbl.fontColor = SKColor.white
+            cscoreLbl.position = CGPoint(x: size.width/2 + 40, y: size.height * 0.787)
+            
+            cscoreLbl.zPosition = 102
+            
+            cscoreLbl.name = "scoreLbl"
+            names.append("scoreLbl")
+            self.addChild(cscoreLbl)
         }
         
         func bestLbl(){
@@ -721,10 +738,21 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(bestLbl)
         }
         
+        func continueBar(){
+            
+            let continueBar = SKSpriteNode(imageNamed: "continueBar")
+            
+            continueBar.zPosition = 101
+            continueBar.position = CGPoint(x: size.width/2 , y: size.height * 0.68)
+            
+            continueBar.name = "continueBar"
+            names.append("continueBar")
+            self.addChild(continueBar)
+        }
+        
         func continueCircleBorder() {
             let circle = SKShapeNode(circleOfRadius: 70)
             circle.name = "bar"
-//            circle.fillColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
             circle.strokeColor = UIColor(red:0.29, green:0.56, blue:0.89, alpha:1.0)
             circle.lineWidth = 5
             
@@ -760,10 +788,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(continueLabel)
         }
         
+
+        
         backGroundRect()
         gameOverLabel()
         scoreLbl()
+        cscoreLbl()
         bestLbl()
+        continueBar()
         continueCircleBorder()
         continueCircle()
         continueLabel()

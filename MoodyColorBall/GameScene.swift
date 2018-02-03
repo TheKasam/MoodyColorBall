@@ -40,7 +40,17 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     let fbIcon = SKSpriteNode(imageNamed: "facebookIcon")
     let starIcon = SKSpriteNode(imageNamed: "starIcon")
     
+    //user defaults
+    let userDefault = UserDefaults.standard
+    
+    
     override func sceneDidLoad() {
+//        userDefault.set("Hello", forKey: "score")
+        if let theGreeting = userDefault.string(forKey: "score") {
+            print(theGreeting)
+        }
+        
+        
         //physics settings
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self

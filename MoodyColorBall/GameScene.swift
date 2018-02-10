@@ -45,10 +45,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     
     override func sceneDidLoad() {
-//        userDefault.set("Hello", forKey: "score")
-        if let theGreeting = userDefault.string(forKey: "score") {
-            print(theGreeting)
-        }
+        //making sure it exits. Default value seems to be zero
+        userDefault.integer(forKey: "highScore")
+
         
         
         //physics settings
@@ -350,9 +349,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.run(SKAction.sequence([actionMove, actionMoveDone]))
         
         }
-        
-        
-    
     
     func ring2() {
         
@@ -488,10 +484,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
 
-        
-        
         // 1 - Choose one of the touches to work with
         guard let touch = touches.first else {
             return
@@ -604,11 +597,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.physicsBody?.collisionBitMask = PhysicsCategory.None
             player.physicsBody?.usesPreciseCollisionDetection = true
             
-            
         }
-        
-        
-        
+
     }
     
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
@@ -627,7 +617,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 //            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
 //            let gameOverScene = GameOverScene(size: self.size, won: false)
 //            self.view?.presentScene(gameOverScene, transition: reveal)
+            
+            let highScore = userDefault.integer(forKey: "highScore")
+            if score > highScore{
+                    userDefault.set(score, forKey: "highScore")
+            }
             addContinueScreen()
+            
         }
         
         
@@ -668,6 +664,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     projectileDidCollideWithMonster(projectile: player, monster: monster)
                     timeOut()
                     
+                    
                 }
             }
         }
@@ -676,8 +673,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     var names = [String]()
     func addContinueScreen() {
-        
-
         
         var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
         func backGroundRect() {
@@ -747,6 +742,22 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("Best")
             self.addChild(bestLbl)
         }
+        func cbestLbl(){
+            
+            //creating score label
+            let cscoreLbl = SKLabelNode(fontNamed: "Hiragino Sans W3")
+            
+            cscoreLbl.text = String(userDefault.integer(forKey: "highScore"))
+            cscoreLbl.fontSize = 20
+            cscoreLbl.fontColor = SKColor.white
+            cscoreLbl.position = CGPoint(x: size.width/2 + 40, y: size.height * 0.716)
+            
+            cscoreLbl.zPosition = 102
+            
+            cscoreLbl.name = "scoreLbl"
+            names.append("scoreLbl")
+            self.addChild(cscoreLbl)
+        }
         
         func continueBar(){
             
@@ -805,6 +816,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         scoreLbl()
         cscoreLbl()
         bestLbl()
+        cbestLbl()
         continueBar()
         continueCircleBorder()
         continueCircle()

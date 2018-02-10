@@ -32,7 +32,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     let monster4I = SKSpriteNode(imageNamed:  "yellowRing")
     
     //view nodes
-    let label = SKLabelNode(fontNamed: "Hiragino Sans W3")
+    let label = SKLabelNode(fontNamed: "Hiragino Sans W3") //score
     let touchBar = SKSpriteNode(imageNamed: "bar")
     let titleText = SKSpriteNode(imageNamed: "titleTextImg")
     let directionLbl = SKLabelNode(fontNamed: "Hiragino Sans W3")
@@ -671,9 +671,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
     }
     
+    //containes all the nodes of the continue screen
     var names = [String]()
+    //adds nodes to screen
     func addContinueScreen() {
         
+        label.removeFromParent() //removes score label
+        
+        //transparent layer added
         var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
         func backGroundRect() {
             let rectLayer = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
@@ -692,7 +697,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         func gameOverLabel(){
             
             let gameOverLabel = SKSpriteNode(imageNamed: "GAME OVER")
-            
             
             gameOverLabel.zPosition = 101
             gameOverLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.9)
@@ -809,6 +813,20 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(continueLabel)
         }
         
+        func noThanksLabel(){
+            
+            let noThanksLabel = SKSpriteNode(imageNamed: "NO THANKS")
+            
+            
+            noThanksLabel.zPosition = 102
+            noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.25)
+            
+            noThanksLabel.name = "noThanksLabel"
+            names.append("noThanksLabel")
+            self.addChild(noThanksLabel)
+        }
+        
+        
 
         
         backGroundRect()
@@ -821,6 +839,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         continueCircleBorder()
         continueCircle()
         continueLabel()
+        noThanksLabel()
     }
     
     func removeContinueScreen(){

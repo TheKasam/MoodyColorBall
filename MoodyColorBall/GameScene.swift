@@ -491,6 +491,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
         let touchLocation = touch.location(in: self)
        
+        
+        
         if fbIcon.contains(touchLocation) {
             print("fb touched")
         } else if starIcon.contains(touchLocation){
@@ -540,9 +542,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         self.initalRun = true
                     }
 
-            
-            // 2 - Set up initial location of projectile
-            //        let monster = SKSpriteNode(imageNamed: "monster")
             player.position = touchLocation
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
             
@@ -556,6 +555,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             
         }
+        
         if let continueNode = childNode(withName: "continueCir"){
             if continueNode.contains(touchLocation){
                 print("continue")
@@ -564,6 +564,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 scene?.view?.isPaused = false
 
             }
+        } else if let noThanks = childNode(withName: "noThanksLabel"){
+            if noThanks.contains(touchLocation){
+                removeContinueScreen()
+                //restart game
+            }
+            
         }
     
         
@@ -609,15 +615,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             label.text = String(self.score)
-//            monster.removeFromParent()
-//            run( SKAction.sequence([SKAction.run({self.addChild(monster)})]))
             
         } else {
             scene?.view?.isPaused = true
-//            let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//            let gameOverScene = GameOverScene(size: self.size, won: false)
-//            self.view?.presentScene(gameOverScene, transition: reveal)
-            
             let highScore = userDefault.integer(forKey: "highScore")
             if score > highScore{
                     userDefault.set(score, forKey: "highScore")
@@ -816,7 +816,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         func noThanksLabel(){
             
             let noThanksLabel = SKSpriteNode(imageNamed: "NO THANKS")
-            
             
             noThanksLabel.zPosition = 102
             noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.25)

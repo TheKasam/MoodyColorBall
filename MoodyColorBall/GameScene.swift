@@ -57,6 +57,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     
+    
     //did move to view
     override func didMove(to view: SKView) {
         
@@ -71,7 +72,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         player.position = CGPoint(x: size.width/2, y: size.height * 0.3)
         player.physicsBody?.usesPreciseCollisionDetection = true
 
-        addChild(player)
         
         
         //creating score label
@@ -85,25 +85,40 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         directionLbl.fontSize = 18
         directionLbl.fontColor = SKColor.white
         directionLbl.position = CGPoint(x: size.width/2, y: size.height * 0.21)
-        addChild(directionLbl)
+
         
         //adding bar
         touchBar.position = CGPoint(x: size.width/2, y: size.height * 0.19)
-        addChild(touchBar)
+
         
         //adding pointer
         pointer.position = CGPoint(x: size.width - ((size.width - touchBar.size.width)/2), y: size.height * 0.17)
-        addChild(pointer)
+        
         
         //adding icons
         fbIcon.position = CGPoint(x: (size.width / 3) + 25, y: size.height * 0.10)
-        addChild(fbIcon)
+        
         
         starIcon.position = CGPoint(x: (size.width / 3) * 2 - 25, y: size.height * 0.10)
-        addChild(starIcon)
+        
         
         //adding titelText
         titleText.position = CGPoint(x: size.width/2, y: size.height * 0.6)
+        
+        //adding home items and initing monsters
+        createHomeScreen()
+        
+
+        
+    }
+    
+    func createHomeScreen(){
+        addChild(player)
+        addChild(directionLbl)
+        addChild(touchBar)
+        addChild(pointer)
+        addChild(fbIcon)
+        addChild(starIcon)
         addChild(titleText)
         
         //editing inital monsters
@@ -121,12 +136,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         )
         
         run(SKAction.sequence([repeatPointer]))
-        
-    }
-    
-    func createHomeScreen(){
-        
-        
     }
     
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
@@ -579,7 +588,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 scene?.removeAllActions()
                 scene?.view?.isPaused = false
                 
-
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1/10), execute: {
+                    self.createHomeScreen()
+                    
+                })
+                
+                
 
                 print("done")
                 

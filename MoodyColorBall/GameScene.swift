@@ -586,14 +586,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
                         self.initalRun = true
                     }
-
-            
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
-            
-
-            
-            
-            
         }
         
         if let continueNode = childNode(withName: "continueCir"){
@@ -602,31 +595,37 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 print("continue")
                 continueGame = false
                 removeContinueScreen()
+                addChild(label)
                 timeOut()
                 scene?.view?.isPaused = false
 
             }
         }
+        func restartGame(){
+            print("no thanks")
+            continueGame = true
+            //removing all children and actions
+            scene?.removeAllChildren()
+            scene?.removeAllActions()
+            scene?.view?.isPaused = false
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
+                self.createHomeScreen()
+                self.initalRun = false //so actions can run again
+                
+            })
+            print("done")
+        }
         if let noThanks = childNode(withName: "noThanksLabel"){
             if noThanks.contains(touchLocation){
-
-                print("no thanks")
-                
-                //removing all children and actions
-                scene?.removeAllChildren()
-                scene?.removeAllActions()
-                scene?.view?.isPaused = false
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
-                    self.createHomeScreen()
-                    self.initalRun = false //so actions can run again
-                    
-                })
-                
-                
-
-                print("done")
-                
+                restartGame()
+            }
+            
+        }
+        
+        if let tryAgain = childNode(withName: "tryImg"){
+            if tryAgain.contains(touchLocation){
+                restartGame()
             }
             
         }
@@ -870,6 +869,19 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("continueLabel")
             self.addChild(continueLabel)
         }
+        
+        func tryAgain(){
+            let tryImg = SKSpriteNode(imageNamed: "TRY AGAIN")
+            
+            
+            tryImg.zPosition = 102
+            tryImg.position = CGPoint(x: size.width/2 , y: size.height/2)
+            
+            tryImg.name = "tryImg"
+            names.append("tryImg")
+            self.addChild(tryImg)
+            
+        }
 
         func noThanksLabel(){
             
@@ -926,9 +938,16 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         bestLbl()
         cbestLbl()
         continueBar()
-        continueCircleBorder()
-        continueCircle()
-        continueLabel()
+        
+        if continueGame == true{
+            continueCircleBorder()
+            continueCircle()
+            continueLabel()
+        } else {
+            tryAgain()
+        }
+        
+        
         noThanksLabel()
         fbIcon()
         starIcon()

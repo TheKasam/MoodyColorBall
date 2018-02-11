@@ -568,13 +568,21 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 scene?.view?.isPaused = false
 
             }
-        } else if let noThanks = childNode(withName: "noThanksLabel"){
+        }
+        if let noThanks = childNode(withName: "noThankRect"){
             if noThanks.contains(touchLocation){
-//                removeContinueScreen()
-                //restart game
-                // For all children
+
                 print("no thanks")
-                self.removeAllChildren()
+                
+                //removing all children and actions
+                scene?.removeAllChildren()
+                scene?.removeAllActions()
+                scene?.view?.isPaused = false
+                
+
+
+                print("done")
+                
             }
             
         }
@@ -631,10 +639,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             }
             addContinueScreen()
             
-            
         }
-        
-        
     }
     
     
@@ -822,21 +827,21 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(continueLabel)
         }
         func noThanksRect() {
-            let circle = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
-            circle.name = "bar"
-            circle.fillColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
-            circle.strokeColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
-            circle.position = CGPoint(x: size.width/2 , y: size.height/2)
-            circle.zPosition = 101
-            circle.name = "continueCir"
-            names.append("continueCir")
-            self.addChild(circle)
+            let noThankRect = SKShapeNode(rectOf: CGSize(width: size.width/2, height: size.height/5))
+            noThankRect.name = "bar"
+            noThankRect.fillColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+            noThankRect.strokeColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+            noThankRect.position = CGPoint(x: size.width/2 , y: size.height * 0.25)
+            noThankRect.zPosition = 102
+            noThankRect.name = "noThankRect"
+            names.append("noThankRect")
+            self.addChild(noThankRect)
         }
         func noThanksLabel(){
             
             let noThanksLabel = SKSpriteNode(imageNamed: "NO THANKS")
             
-            noThanksLabel.zPosition = 103
+            noThanksLabel.zPosition = 110
             noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.25)
             
             noThanksLabel.name = "noThanksLabel"
@@ -857,7 +862,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         continueCircleBorder()
         continueCircle()
         continueLabel()
+        noThanksRect()
         noThanksLabel()
+        
     }
     
     func removeContinueScreen(){

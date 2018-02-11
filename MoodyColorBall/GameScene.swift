@@ -546,7 +546,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 print("inital ")
                 //logic to only start running once
                 if self.initalRun == false{
-            
+                        score = 0 //reseting score
+                        label.text = String(0)
                         addChild(label)
             
                         //removing elements
@@ -610,6 +611,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             scene?.view?.isPaused = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
+                
                 self.createHomeScreen()
                 self.initalRun = false //so actions can run again
                 

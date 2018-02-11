@@ -54,6 +54,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         //background color
         backgroundColor = SKColor.black
+
         
     }
     
@@ -107,6 +108,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         titleText.position = CGPoint(x: size.width/2, y: size.height * 0.6)
         
         //adding home items and initing monsters
+
         createHomeScreen()
         
 
@@ -129,6 +131,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         editMonster(monster: monster2I, position: CGPoint(x:  (monster1I.size.width * 3 / 2 + 16 + space)  , y: size.height - 2 * monster1I.size.height),name:"greenRing")
         editMonster(monster: monster3I, position: CGPoint(x:  (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: size.height - 2 * monster1I.size.height),name:"redRing")
         editMonster(monster: monster4I, position: CGPoint(x:   (monster1I.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1I.size.height),name:"yellowRing")
+        //monstersnames
+
         
         let wait = SKAction.wait(forDuration: 3.0)
         
@@ -141,6 +145,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
         monster.userData = ["imageName" : name]
+        monster.name = name
         monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
         monster.physicsBody?.isDynamic = true // 2
         monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
@@ -480,13 +485,26 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //runs inital row of rings
     func run1(){
+        
+        print("run run1")
         let actualDuration =   ringSpeeed2
         let actionMoveDone = SKAction.removeFromParent()
+        
+        guard let monster1 = childNode(withName: "blueRing") else {
+            print("no inital monster found")
+            return
+        }
+        
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
-        let actionMove = SKAction.move(to: CGPoint(x: (self.monster1I.size.width/2 + 16) , y: 0), duration: TimeInterval(actualDuration))
-        self.monster1I.run(SKAction.sequence([actionMove, actionMoveDone]))
+        let actionMove = SKAction.move(to: CGPoint(x: (monster1I.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
         
+        do{
+        monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
+        }
+        catch {
+            print("nope")
+        }
         let actionMove2 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
         self.monster2I.run(SKAction.sequence([actionMove2, actionMoveDone]))
         
@@ -512,7 +530,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else if starIcon.contains(touchLocation){
             print("star touched")
         } else {
-                print("else")
+                print("inital ")
                 //logic to only start running once
                 if self.initalRun == false{
             
@@ -557,14 +575,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     }
 
             player.position = touchLocation
-            player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
-            
-            player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
-            player.physicsBody?.isDynamic = true
-            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-            player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
-            player.physicsBody?.collisionBitMask = PhysicsCategory.None
-                    player.physicsBody?.usesPreciseCollisionDetection = true
+
             
             
             
@@ -589,7 +600,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 scene?.removeAllActions()
                 scene?.view?.isPaused = false
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5/10), execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                     self.createHomeScreen()
                     self.initalRun = false //so actions can run again
                     

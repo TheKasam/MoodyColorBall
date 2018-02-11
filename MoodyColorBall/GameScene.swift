@@ -854,8 +854,41 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("noThanksLabel")
             self.addChild(noThanksLabel)
         }
-        
-        
+
+        func fbIcon(){
+            
+            let fbIcon = SKSpriteNode(imageNamed: "facebookIcon")
+            
+            fbIcon.zPosition = 110
+            fbIcon.position = CGPoint(x: size.width/3 , y: size.height * 0.15)
+            
+            fbIcon.name = "fbIcon"
+            names.append("fbIcon")
+            self.addChild(fbIcon)
+        }
+        func starIcon(){
+
+            let starIcon = SKSpriteNode(imageNamed: "starIcon")
+
+            starIcon.zPosition = 110
+            starIcon.position = CGPoint(x: size.width/2 , y: size.height * 0.15)
+
+            starIcon.name = "starIcon"
+            names.append("starIcon")
+            self.addChild(starIcon)
+        }
+        func shareIcon(){
+
+            let shareIcon = SKSpriteNode(imageNamed: "shareIcon1")
+
+            shareIcon.zPosition = 110
+            shareIcon.position = CGPoint(x: size.width/3 * 2 , y: size.height * 0.15)
+
+            shareIcon.name = "shareIcon"
+            names.append("shareIcon")
+            self.addChild(shareIcon)
+        }
+
 
         
         backGroundRect()
@@ -869,6 +902,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         continueCircle()
         continueLabel()
         noThanksLabel()
+        fbIcon()
+        starIcon()
+        shareIcon()
         
     }
     

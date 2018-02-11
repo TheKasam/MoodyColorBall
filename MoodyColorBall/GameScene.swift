@@ -574,7 +574,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         self.initalRun = true
                     }
 
-            player.position = touchLocation
+            
+            player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
+            
 
             
             

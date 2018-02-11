@@ -942,7 +942,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         continueBar()
         
         if continueGame == true{
-            continueCircleBorder()
+//            continueCircleBorder()
             continueCircle()
             continueLabel()
         } else {
@@ -975,15 +975,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         // Use UIBezierPath as an easy way to create the CGPath for the layer.
         // The path should be the entire circle.
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: (frame.size.width - 10)/2, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2.0), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 70, startAngle: CGFloat(Double.pi * 1.5), endAngle: CGFloat(Double.pi * 1.499), clockwise: true)
         
         // Setup the CAShapeLayer with the path, colors, and line width
         circleLayer = CAShapeLayer()
         circleLayer.path = circlePath.cgPath
         circleLayer.backgroundColor = UIColor.clear.cgColor
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.red.cgColor
-        circleLayer.lineWidth = 5.0;
+        circleLayer.strokeColor = UIColor(red:0.29, green:0.56, blue:0.89, alpha:1.0).cgColor
+        circleLayer.lineWidth = 5.0
         
         // Don't draw the circle initially
         circleLayer.strokeEnd = 0.0

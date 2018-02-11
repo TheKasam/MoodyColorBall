@@ -48,8 +48,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 
-        
-        
         //physics settings
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
@@ -59,6 +57,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     
+    //did move to view
     override func didMove(to view: SKView) {
         
         //adding player data and physics
@@ -122,6 +121,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         )
         
         run(SKAction.sequence([repeatPointer]))
+        
+    }
+    
+    func createHomeScreen(){
+        
         
     }
     
@@ -566,8 +570,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             }
         } else if let noThanks = childNode(withName: "noThanksLabel"){
             if noThanks.contains(touchLocation){
-                removeContinueScreen()
+//                removeContinueScreen()
                 //restart game
+                // For all children
+                print("no thanks")
+                self.removeAllChildren()
             }
             
         }
@@ -623,6 +630,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     userDefault.set(score, forKey: "highScore")
             }
             addContinueScreen()
+            
             
         }
         
@@ -788,6 +796,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("continueCirBorder")
             self.addChild(circle)
         }
+        
         func continueCircle() {
             let circle = SKShapeNode(circleOfRadius: 67)
             circle.name = "bar"
@@ -812,12 +821,22 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             names.append("continueLabel")
             self.addChild(continueLabel)
         }
-        
+        func noThanksRect() {
+            let circle = SKShapeNode(rectOf: CGSize(width: size.width, height: size.height))
+            circle.name = "bar"
+            circle.fillColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+            circle.strokeColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+            circle.position = CGPoint(x: size.width/2 , y: size.height/2)
+            circle.zPosition = 101
+            circle.name = "continueCir"
+            names.append("continueCir")
+            self.addChild(circle)
+        }
         func noThanksLabel(){
             
             let noThanksLabel = SKSpriteNode(imageNamed: "NO THANKS")
             
-            noThanksLabel.zPosition = 102
+            noThanksLabel.zPosition = 103
             noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.25)
             
             noThanksLabel.name = "noThanksLabel"

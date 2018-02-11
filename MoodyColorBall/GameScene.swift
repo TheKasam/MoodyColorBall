@@ -27,10 +27,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //game nodes
     let player = SKSpriteNode(imageNamed: "redBall")
-    let monster1I = SKSpriteNode(imageNamed:  "blueRing")
-    let monster2I = SKSpriteNode(imageNamed:  "greenRing")
-    let monster3I = SKSpriteNode(imageNamed:  "redRing")
-    let monster4I = SKSpriteNode(imageNamed:  "yellowRing")
+
     
     //view nodes
     let label = SKLabelNode(fontNamed: "Hiragino Sans W3") //score
@@ -125,6 +122,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         addChild(titleText)
         
         //editing inital monsters
+        let monster1I = SKSpriteNode(imageNamed:  "blueRing")
+        let monster2I = SKSpriteNode(imageNamed:  "greenRing")
+        let monster3I = SKSpriteNode(imageNamed:  "redRing")
+        let monster4I = SKSpriteNode(imageNamed:  "yellowRing")
+        
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
         editMonster(monster: monster1I, position: CGPoint(x:    monster1I.size.width/2 + 16 , y: size.height - 2 * monster1I.size.height),name:"blueRing")
@@ -494,25 +496,36 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             print("no inital monster found")
             return
         }
+        guard let monster2 = childNode(withName: "greenRing") else {
+            print("no inital monster found")
+            return
+        }
+        guard let monster3 = childNode(withName: "redRing") else {
+            print("no inital monster found")
+            return
+        }
+        guard let monster4 = childNode(withName: "yellowRing") else {
+            print("no inital monster found")
+            return
+        }
+        
+        let monster1I = SKSpriteNode(imageNamed:  "blueRing")
         
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
         let actionMove = SKAction.move(to: CGPoint(x: (monster1I.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
-        
-        do{
         monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
-        }
-        catch {
-            print("nope")
-        }
+
+        
+        
         let actionMove2 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
-        self.monster2I.run(SKAction.sequence([actionMove2, actionMoveDone]))
-        
+        monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
+
         let actionMove3 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: 0), duration: TimeInterval(actualDuration))
-        self.monster3I.run(SKAction.sequence([actionMove3, actionMoveDone]))
-        
+        monster3.run(SKAction.sequence([actionMove3, actionMoveDone]))
+
         let actionMove4 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 7 / 2 + 16 + space * 3) , y: 0), duration: TimeInterval(actualDuration))
-        self.monster4I.run(SKAction.sequence([actionMove4, actionMoveDone]))
+        monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -585,7 +598,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         if let continueNode = childNode(withName: "continueCir"){
             if continueNode.contains(touchLocation){
+                
                 print("continue")
+                continueGame = false
                 removeContinueScreen()
                 timeOut()
                 scene?.view?.isPaused = false

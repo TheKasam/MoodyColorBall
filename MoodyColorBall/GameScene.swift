@@ -637,7 +637,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             continueNode.removeAllChildren()
             gameNode.removeAllChildren()
             homeNode.removeAllChildren()
+            homeNode.removeAllActions()
             gameNode.removeAllActions()
+            
             
             if let layers = view?.layer.sublayers{
                 for layer in layers {

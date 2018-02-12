@@ -29,6 +29,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     let player = SKSpriteNode(imageNamed: "redBall")
     let gameNode = SKNode()
     let continueNode = SKNode()
+    let homeNode = SKNode()
     
     //view nodes
     let label = SKLabelNode(fontNamed: "Hiragino Sans W3") //score
@@ -53,6 +54,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //background color
         backgroundColor = SKColor.black
 
+        addChild(homeNode)
         addChild(gameNode)
         addChild(continueNode)
     }
@@ -115,13 +117,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     func createHomeScreen(){
-        self.gameNode.addChild(player)
-        self.gameNode.addChild(directionLbl)
-        self.gameNode.addChild(touchBar)
-        self.gameNode.addChild(pointer)
-        self.gameNode.addChild(fbIcon)
-        self.gameNode.addChild(starIcon)
-        self.gameNode.addChild(titleText)
+        self.homeNode.addChild(player)
+        self.homeNode.addChild(directionLbl)
+        self.homeNode.addChild(touchBar)
+        self.homeNode.addChild(pointer)
+        self.homeNode.addChild(fbIcon)
+        self.homeNode.addChild(starIcon)
+        self.homeNode.addChild(titleText)
         
         //editing inital monsters
         let monster1I = SKSpriteNode(imageNamed:  "blueRing")
@@ -358,7 +360,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.position = CGPoint(x:   monster.size.width/2 + 16 , y: size.height + monster.size.height/2)
         
         // Add the monster to the scene
-        addChild(monster)
+        self.gameNode.addChild(monster)
         
         // Determine speed of the monster
         let actualDuration =   ringSpeeed//random(min: CGFloat(2.0), max: CGFloat(4.0))
@@ -396,7 +398,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.position = CGPoint(x: (monster.size.width * 3 / 2 + 16 + space) , y: size.height + monster.size.height/2)
         
         // Add the monster to the scene
-        addChild(monster)
+        self.gameNode.addChild(monster)
         
         // Determine speed of the monster
         let actualDuration =   ringSpeeed//random(min: CGFloat(2.0), max: CGFloat(4.0))
@@ -434,7 +436,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.position = CGPoint(x: (monster.size.width * 5 / 2 + 16 + space * 2) , y: size.height + monster.size.height/2)
         
         // Add the monster to the scene
-        addChild(monster)
+        self.gameNode.addChild(monster)
         
         // Determine speed of the monster
         let actualDuration =   ringSpeeed//random(min: CGFloat(2.0), max: CGFloat(4.0))
@@ -472,7 +474,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.position = CGPoint(x: (monster.size.width * 7 / 2 + 16 + space * 3) , y: size.height + monster.size.height/2)
         
         // Add the monster to the scene
-        addChild(monster)
+        self.gameNode.addChild(monster)
         
         // Determine speed of the monster
         let actualDuration =   ringSpeeed//random(min: CGFloat(2.0), max: CGFloat(4.0))
@@ -504,7 +506,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
             
             monster.position = position
-            addChild(monster)
+            self.gameNode.addChild(monster)
         }
 
         

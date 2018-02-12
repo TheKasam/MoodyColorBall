@@ -509,11 +509,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             monster.position = position
             self.gameNode.addChild(monster)
         }
-
         
         let monster1 = SKSpriteNode(imageNamed: "blueRing")
         let space = ((size.width - 32) - monster1.size.width * 4)/3
-
         
         addPhysics(monster: monster1, name: "blueRing", position: CGPoint(x: monster1.size.width/2 + 16 , y: size.height - 2 * monster1.size.height))
         
@@ -525,24 +523,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
         let monster4 = SKSpriteNode(imageNamed: "yellowRing")
         addPhysics(monster: monster4, name: "yellowRing", position: CGPoint(x:   (monster1.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1.size.height))
-        
-        
-        
-        
-        
 
         print("run run1")
         let actualDuration =   ringSpeeed2
         let actionMoveDone = SKAction.removeFromParent()
 
-
-
-
-
         let actionMove = SKAction.move(to: CGPoint(x: (monster1.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
         monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
-
-
 
         let actionMove2 = SKAction.move(to: CGPoint(x: (monster1.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
         monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
@@ -625,20 +612,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 self.gameNode.addChild(label)
                 timeOut()
                 gameNode.isPaused = false
-
+                movedOn = true
             }
         }
         func restartGame(){
             print("no thanks")
+            movedOn = true
             continueGame = true
             //removing all children and actions
             gameNode.isPaused = false
 
             continueNode.removeAllChildren()
+            continueNode.removeAllActions()
+            
             gameNode.removeAllChildren()
+            gameNode.removeAllActions()
+
             homeNode.removeAllChildren()
             homeNode.removeAllActions()
-            gameNode.removeAllActions()
             
             
             if let layers = view?.layer.sublayers{
@@ -788,9 +779,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //containes all the nodes of the continue screen
     var names = [String]()
+    
+    //movedOn
+    var movedOn = false
     //adds nodes to screen
     func addContinueScreen() {
-        
+        movedOn = false
         gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
         
         //transparent layer added
@@ -991,8 +985,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             continueLabel()
             ContinueScreen.animateCircle(frame: frame,view: view)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
-                
+            func switchItems(){
                 self.continueNode.childNode(withName: "continueLabel")?.removeFromParent()
                 self.continueNode.childNode(withName: "continueCir")?.removeFromParent()
                 if let layers = self.view?.layer.sublayers{
@@ -1006,8 +999,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 }
                 
                 tryAgain()
-                
-            })
+            }
+            
+            let wait = SKAction.wait(forDuration: 5.0)
+            continueNode.run(SKAction.sequence([wait,SKAction.run(switchItems)]))
+            
+            
+
         } else {
             tryAgain()
         }

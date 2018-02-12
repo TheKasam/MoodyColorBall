@@ -990,6 +990,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             continueCircle()
             continueLabel()
             ContinueScreen.animateCircle(frame: frame,view: view)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
+                
+                self.continueNode.childNode(withName: "continueLabel")?.removeFromParent()
+                self.continueNode.childNode(withName: "continueCir")?.removeFromParent()
+                if let layers = self.view?.layer.sublayers{
+                    for layer in layers {
+                        if layer.name == "circleLayer" {
+                            layer.removeFromSuperlayer()
+                        }
+                    }
+                } else {
+                    print("layer didnt work")
+                }
+                
+                tryAgain()
+                
+            })
         } else {
             tryAgain()
         }

@@ -27,7 +27,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //game nodes
     let player = SKSpriteNode(imageNamed: "redBall")
-
+    let gameNode = SKNode()
+    let continueNode = SKNode()
     
     //view nodes
     let label = SKLabelNode(fontNamed: "Hiragino Sans W3") //score
@@ -52,7 +53,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //background color
         backgroundColor = SKColor.black
 
-        
+        addChild(gameNode)
+        addChild(continueNode)
     }
     
     
@@ -113,13 +115,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     func createHomeScreen(){
-        addChild(player)
-        addChild(directionLbl)
-        addChild(touchBar)
-        addChild(pointer)
-        addChild(fbIcon)
-        addChild(starIcon)
-        addChild(titleText)
+        self.gameNode.addChild(player)
+        self.gameNode.addChild(directionLbl)
+        self.gameNode.addChild(touchBar)
+        self.gameNode.addChild(pointer)
+        self.gameNode.addChild(fbIcon)
+        self.gameNode.addChild(starIcon)
+        self.gameNode.addChild(titleText)
         
         //editing inital monsters
         let monster1I = SKSpriteNode(imageNamed:  "blueRing")
@@ -155,7 +157,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
         
         monster.position = position
-        addChild(monster)
+        self.gameNode.addChild(monster)
     }
     
     //shuffels Ring Array and returns
@@ -276,7 +278,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         pointsArray.append(finalAction)
 
         // Add the monster to the scene
-        addChild(monster)
+        self.gameNode.addChild(monster)
         let actionMoveDone = SKAction.removeFromParent()
         pointsArray.append(actionMoveDone)
 
@@ -329,7 +331,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 //            pointsArray.append(finalAction)
             
             // Add the monster to the scene
-            addChild(monster)
+            self.gameNode.addChild(monster)
             let actionMoveDone = SKAction.removeFromParent()
             pointsArray.append(actionMoveDone)
             
@@ -487,10 +489,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //runs inital row of rings
     func run1(){
-        childNode(withName: "blueRing")?.removeFromParent()
-        childNode(withName: "greenRing")?.removeFromParent()
-        childNode(withName: "redRing")?.removeFromParent()
-        childNode(withName: "yellowRing")?.removeFromParent()
+        gameNode.childNode(withName: "blueRing")?.removeFromParent()
+        gameNode.childNode(withName: "greenRing")?.removeFromParent()
+        gameNode.childNode(withName: "redRing")?.removeFromParent()
+        gameNode.childNode(withName: "yellowRing")?.removeFromParent()
         
         func addPhysics(monster: SKSpriteNode, name: String, position: CGPoint){
             monster.userData = ["imageName" : name]
@@ -611,7 +613,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
         }
         
-        if let continueNode = childNode(withName: "continueCir"){
+        if let continueNode = gameNode.childNode(withName: "continueCir"){
             if continueNode.contains(touchLocation){
                 
                 print("continue")
@@ -865,7 +867,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             circle.zPosition = 101
             circle.name = "continueCir"
             names.append("continueCir")
-            self.addChild(circle)
+            self.gameNode.addChild(circle)
         }
         
         func continueLabel(){
@@ -878,7 +880,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
             continueLabel.name = "continueLabel"
             names.append("continueLabel")
-            self.addChild(continueLabel)
+            self.gameNode.addChild(continueLabel)
         }
         
         func tryAgain(){

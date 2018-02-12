@@ -573,7 +573,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 if self.initalRun == false{
                         score = 0 //reseting score
                         label.text = String(0)
-                        addChild(label)
+                        self.homeNode.addChild(label)
             
                         //removing elements
                         touchBar.removeFromParent()
@@ -615,15 +615,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
         }
         
-        if let continueNode = gameNode.childNode(withName: "continueCir"){
+        if let continueNode = continueNode.childNode(withName: "continueCir"){
             if continueNode.contains(touchLocation){
                 
                 print("continue")
                 continueGame = false
-                ContinueScreen.removeContinueScreen(names: names, view: view, GameScene: self)
-                addChild(label)
+                removeContinueScreen()
+                self.homeNode.addChild(label)
                 timeOut()
-                scene?.view?.isPaused = false
+                gameNode.isPaused = false
 
             }
         }
@@ -643,14 +643,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             })
             print("done")
         }
-        if let noThanks = childNode(withName: "noThanksLabel"){
+        if let noThanks = continueNode.childNode(withName: "noThanksLabel"){
             if noThanks.contains(touchLocation){
                 restartGame()
             }
             
         }
         
-        if let tryAgain = childNode(withName: "tryImg"){
+        if let tryAgain = continueNode.childNode(withName: "tryImg"){
             if tryAgain.contains(touchLocation){
                 restartGame()
             }
@@ -702,7 +702,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             label.text = String(self.score)
             
         } else {
-            scene?.view?.isPaused = true
+            gameNode.isPaused = true
             let highScore = userDefault.integer(forKey: "highScore")
             if score > highScore{
                     userDefault.set(score, forKey: "highScore")
@@ -754,6 +754,18 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
     }
     
+    func removeContinueScreen(){
+        for name in names{
+            gameNode.childNode(withName: name)?.removeFromParent()
+        }
+        for layer in (view?.layer.sublayers)! {
+            if layer.name == "circleLayer" {
+                layer.removeFromSuperlayer()
+            }
+        }
+        
+    }
+    
     //containes all the nodes of the continue screen
     var names = [String]()
     //adds nodes to screen
@@ -774,7 +786,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             rectLayer.lineWidth = 0.01;
             rectLayer.name = "continueBackground"
             names.append("continueBackground")
-            self.addChild(rectLayer)
+            self.continueNode.addChild(rectLayer)
         }
         
         func gameOverLabel(){
@@ -786,7 +798,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             gameOverLabel.name = "GAME OVER"
             names.append("GAME OVER")
-            self.addChild(gameOverLabel)
+            self.continueNode.addChild(gameOverLabel)
         }
         
         func scoreLbl(){
@@ -798,7 +810,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             scoreLbl.name = "Score"
             names.append("Score")
-            self.addChild(scoreLbl)
+            self.continueNode.addChild(scoreLbl)
         }
         
         func cscoreLbl(){
@@ -815,7 +827,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             cscoreLbl.name = "scoreLbl"
             names.append("scoreLbl")
-            self.addChild(cscoreLbl)
+            self.continueNode.addChild(cscoreLbl)
         }
         
         func bestLbl(){
@@ -827,7 +839,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             bestLbl.name = "Best"
             names.append("Best")
-            self.addChild(bestLbl)
+            self.continueNode.addChild(bestLbl)
         }
         func cbestLbl(){
             
@@ -843,7 +855,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             cscoreLbl.name = "scoreLbl"
             names.append("scoreLbl")
-            self.addChild(cscoreLbl)
+            self.continueNode.addChild(cscoreLbl)
         }
         
         func continueBar(){
@@ -855,7 +867,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             continueBar.name = "continueBar"
             names.append("continueBar")
-            self.addChild(continueBar)
+            self.continueNode.addChild(continueBar)
         }
         
 
@@ -869,7 +881,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             circle.zPosition = 101
             circle.name = "continueCir"
             names.append("continueCir")
-            self.gameNode.addChild(circle)
+            self.continueNode.addChild(circle)
         }
         
         func continueLabel(){
@@ -882,7 +894,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
             continueLabel.name = "continueLabel"
             names.append("continueLabel")
-            self.gameNode.addChild(continueLabel)
+            self.continueNode.addChild(continueLabel)
         }
         
         func tryAgain(){
@@ -894,7 +906,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             tryImg.name = "tryImg"
             names.append("tryImg")
-            self.addChild(tryImg)
+            self.continueNode.addChild(tryImg)
             
         }
 
@@ -907,7 +919,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             noThanksLabel.name = "noThanksLabel"
             names.append("noThanksLabel")
-            self.addChild(noThanksLabel)
+            self.continueNode.addChild(noThanksLabel)
         }
 
         func fbIcon(){
@@ -919,7 +931,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             fbIcon.name = "fbIcon"
             names.append("fbIcon")
-            self.addChild(fbIcon)
+            self.continueNode.addChild(fbIcon)
         }
         func starIcon(){
 
@@ -930,7 +942,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
             starIcon.name = "starIcon"
             names.append("starIcon")
-            self.addChild(starIcon)
+            self.continueNode.addChild(starIcon)
         }
         func shareIcon(){
 
@@ -941,7 +953,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
             shareIcon.name = "shareIcon"
             names.append("shareIcon")
-            self.addChild(shareIcon)
+            self.continueNode.addChild(shareIcon)
         }
 
 

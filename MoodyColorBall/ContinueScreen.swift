@@ -11,9 +11,9 @@ import SpriteKit
 
 class ContinueScreen: SKNode {
     
-    static func removeContinueScreen(names: [String], view: UIView?, GameScene: GameScene){
+    static func removeContinueScreen(names: [String], view: UIView?, GameScene: GameScene, gameNode: SKNode){
         for name in names{
-            GameScene.childNode(withName: name)?.removeFromParent()
+            gameNode.childNode(withName: name)?.removeFromParent()
         }
         for layer in (view?.layer.sublayers)! {
             if layer.name == "circleLayer" {

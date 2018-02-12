@@ -687,12 +687,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             player.position = touchLocation
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
             
-            player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
-            player.physicsBody?.isDynamic = true
-            player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-            player.physicsBody?.contactTestBitMask = PhysicsCategory.Monster
-            player.physicsBody?.collisionBitMask = PhysicsCategory.None
-            player.physicsBody?.usesPreciseCollisionDetection = true
             
         }
 

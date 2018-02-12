@@ -487,45 +487,45 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //runs inital row of rings
     func run1(){
-        
-        print("run run1")
-        let actualDuration =   ringSpeeed2
-        let actionMoveDone = SKAction.removeFromParent()
-        
-        guard let monster1 = childNode(withName: "blueRing") else {
-            print("no inital monster found")
-            return
-        }
-        guard let monster2 = childNode(withName: "greenRing") else {
-            print("no inital monster found")
-            return
-        }
-        guard let monster3 = childNode(withName: "redRing") else {
-            print("no inital monster found")
-            return
-        }
-        guard let monster4 = childNode(withName: "yellowRing") else {
-            print("no inital monster found")
-            return
-        }
-        
-        let monster1I = SKSpriteNode(imageNamed:  "blueRing")
-        
-        let space = ((size.width - 32) - monster1I.size.width * 4)/3
-        
-        let actionMove = SKAction.move(to: CGPoint(x: (monster1I.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
-        monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
-
-        
-        
-        let actionMove2 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
-        monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
-
-        let actionMove3 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: 0), duration: TimeInterval(actualDuration))
-        monster3.run(SKAction.sequence([actionMove3, actionMoveDone]))
-
-        let actionMove4 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 7 / 2 + 16 + space * 3) , y: 0), duration: TimeInterval(actualDuration))
-        monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
+        childNode(withName: "blueRing")?.removeFromParent()
+//        print("run run1")
+//        let actualDuration =   ringSpeeed2
+//        let actionMoveDone = SKAction.removeFromParent()
+//
+//        guard let monster1 = childNode(withName: "blueRing") else {
+//            print("no inital monster found")
+//            return
+//        }
+//        guard let monster2 = childNode(withName: "greenRing") else {
+//            print("no inital monster found")
+//            return
+//        }
+//        guard let monster3 = childNode(withName: "redRing") else {
+//            print("no inital monster found")
+//            return
+//        }
+//        guard let monster4 = childNode(withName: "yellowRing") else {
+//            print("no inital monster found")
+//            return
+//        }
+//
+//        let monster1I = SKSpriteNode(imageNamed:  "blueRing")
+//
+//        let space = ((size.width - 32) - monster1I.size.width * 4)/3
+//
+//        let actionMove = SKAction.move(to: CGPoint(x: (monster1I.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
+//        monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
+//
+//
+//
+//        let actionMove2 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
+//        monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
+//
+//        let actionMove3 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: 0), duration: TimeInterval(actualDuration))
+//        monster3.run(SKAction.sequence([actionMove3, actionMoveDone]))
+//
+//        let actionMove4 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 7 / 2 + 16 + space * 3) , y: 0), duration: TimeInterval(actualDuration))
+//        monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

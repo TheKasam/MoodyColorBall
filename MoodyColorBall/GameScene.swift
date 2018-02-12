@@ -79,6 +79,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         //creating score label
         label.text = String(score)
+        label.name = "label"
         label.fontSize = 30
         label.fontColor = SKColor.white
         label.position = CGPoint(x: size.width/2, y: size.height - label.fontSize - 30)
@@ -573,7 +574,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 if self.initalRun == false{
                         score = 0 //reseting score
                         label.text = String(0)
-                        self.homeNode.addChild(label)
+                        self.gameNode.addChild(label)
             
                         //removing elements
                         touchBar.removeFromParent()
@@ -621,7 +622,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 print("continue")
                 continueGame = false
                 removeContinueScreen()
-                self.homeNode.addChild(label)
+                self.gameNode.addChild(label)
                 timeOut()
                 gameNode.isPaused = false
 
@@ -631,9 +632,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             print("no thanks")
             continueGame = true
             //removing all children and actions
-            scene?.removeAllChildren()
-            scene?.removeAllActions()
             gameNode.isPaused = false
+
+            continueNode.removeAllChildren()
+            gameNode.removeAllChildren()
+            homeNode.removeAllChildren()
+            gameNode.removeAllActions()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                 
@@ -772,7 +776,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //adds nodes to screen
     func addContinueScreen() {
         
-        label.removeFromParent() //removes score label
+        gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
         
         //transparent layer added
         var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)

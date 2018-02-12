@@ -129,7 +129,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
-        editMonster(monster: monster1I, position: CGPoint(x:    monster1I.size.width/2 + 16 , y: size.height - 2 * monster1I.size.height),name:"blueRing")
+        editMonster(monster: monster1I, position: CGPoint(x: monster1I.size.width/2 + 16 , y: size.height - 2 * monster1I.size.height),name:"blueRing")
         editMonster(monster: monster2I, position: CGPoint(x:  (monster1I.size.width * 3 / 2 + 16 + space)  , y: size.height - 2 * monster1I.size.height),name:"greenRing")
         editMonster(monster: monster3I, position: CGPoint(x:  (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: size.height - 2 * monster1I.size.height),name:"redRing")
         editMonster(monster: monster4I, position: CGPoint(x:   (monster1I.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1I.size.height),name:"yellowRing")
@@ -451,6 +451,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         // Create sprite
         let monster = SKSpriteNode(imageNamed: self.shuffledRingArray[3])
+        
+        
         monster.userData = ["imageName" : self.shuffledRingArray[3]]
         
         monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
@@ -459,14 +461,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
         
-        // Determine where to spawn the monster along the Y axis
-        let actualY = random(min: monster.size.height/2, max: size.height - monster.size.height/2)
         
         // Position the monster slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
         
-        //        monster.position = CGPoint(x: size.width + monster.size.width/2, y: actualY)
         let space = ((size.width - 32) - monster.size.width * 4)/3
+        
         monster.position = CGPoint(x: (monster.size.width * 7 / 2 + 16 + space * 3) , y: size.height + monster.size.height/2)
         
         // Add the monster to the scene
@@ -488,44 +488,65 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //runs inital row of rings
     func run1(){
         childNode(withName: "blueRing")?.removeFromParent()
-//        print("run run1")
-//        let actualDuration =   ringSpeeed2
-//        let actionMoveDone = SKAction.removeFromParent()
-//
-//        guard let monster1 = childNode(withName: "blueRing") else {
-//            print("no inital monster found")
-//            return
-//        }
-//        guard let monster2 = childNode(withName: "greenRing") else {
-//            print("no inital monster found")
-//            return
-//        }
-//        guard let monster3 = childNode(withName: "redRing") else {
-//            print("no inital monster found")
-//            return
-//        }
-//        guard let monster4 = childNode(withName: "yellowRing") else {
-//            print("no inital monster found")
-//            return
-//        }
-//
-//        let monster1I = SKSpriteNode(imageNamed:  "blueRing")
-//
-//        let space = ((size.width - 32) - monster1I.size.width * 4)/3
-//
-//        let actionMove = SKAction.move(to: CGPoint(x: (monster1I.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
-//        monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
-//
-//
-//
-//        let actionMove2 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
-//        monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
-//
-//        let actionMove3 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: 0), duration: TimeInterval(actualDuration))
-//        monster3.run(SKAction.sequence([actionMove3, actionMoveDone]))
-//
-//        let actionMove4 = SKAction.move(to: CGPoint(x: (monster1I.size.width * 7 / 2 + 16 + space * 3) , y: 0), duration: TimeInterval(actualDuration))
-//        monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
+        childNode(withName: "greenRing")?.removeFromParent()
+        childNode(withName: "redRing")?.removeFromParent()
+        childNode(withName: "yellowRing")?.removeFromParent()
+        
+        func addPhysics(monster: SKSpriteNode, name: String, position: CGPoint){
+            monster.userData = ["imageName" : name]
+            
+            monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
+            monster.physicsBody?.isDynamic = true // 2
+            monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
+            monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
+            monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+            
+            monster.position = position
+            addChild(monster)
+        }
+
+        
+        let monster1 = SKSpriteNode(imageNamed: "blueRing")
+        let space = ((size.width - 32) - monster1.size.width * 4)/3
+
+        
+        addPhysics(monster: monster1, name: "blueRing", position: CGPoint(x: monster1.size.width/2 + 16 , y: size.height - 2 * monster1.size.height))
+        
+        let monster2 = SKSpriteNode(imageNamed: "greenRing")
+        addPhysics(monster: monster2, name: "greenRing", position: CGPoint(x:  (monster1.size.width * 3 / 2 + 16 + space)  , y: size.height - 2 * monster1.size.height))
+
+        let monster3 = SKSpriteNode(imageNamed: "redRing")
+        addPhysics(monster: monster3, name: "redRing",position: CGPoint(x:  (monster1.size.width * 5 / 2 + 16 + space * 2) , y: size.height - 2 * monster1.size.height))
+
+        let monster4 = SKSpriteNode(imageNamed: "yellowRing")
+        addPhysics(monster: monster4, name: "yellowRing", position: CGPoint(x:   (monster1.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1.size.height))
+        
+        
+        
+        
+        
+
+        print("run run1")
+        let actualDuration =   ringSpeeed2
+        let actionMoveDone = SKAction.removeFromParent()
+
+
+
+
+
+        let actionMove = SKAction.move(to: CGPoint(x: (monster1.size.width * 1 / 2 + 16) , y: 0), duration: TimeInterval(actualDuration))
+        monster1.run(SKAction.sequence([actionMove, actionMoveDone]))
+
+
+
+        let actionMove2 = SKAction.move(to: CGPoint(x: (monster1.size.width * 3 / 2 + 16 + space) , y: 0), duration: TimeInterval(actualDuration))
+        monster2.run(SKAction.sequence([actionMove2, actionMoveDone]))
+
+        let actionMove3 = SKAction.move(to: CGPoint(x: (monster1.size.width * 5 / 2 + 16 + space * 2) , y: 0), duration: TimeInterval(actualDuration))
+        monster3.run(SKAction.sequence([actionMove3, actionMoveDone]))
+
+        let actionMove4 = SKAction.move(to: CGPoint(x: (monster1.size.width * 7 / 2 + 16 + space * 3) , y: 0), duration: TimeInterval(actualDuration))
+        monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -147,7 +147,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             SKAction.sequence([ SKAction.run(runPointer),wait ])
         )
         
-        run(SKAction.sequence([repeatPointer]))
+        homeNode.run(SKAction.sequence([repeatPointer]))
     }
     
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
@@ -639,6 +639,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             homeNode.removeAllChildren()
             gameNode.removeAllActions()
             
+            if let layers = view?.layer.sublayers{
+                for layer in layers {
+                    if layer.name == "circleLayer" {
+                        layer.removeFromSuperlayer()
+                    }
+                }
+            }
+            
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                 
                 self.createHomeScreen()
@@ -763,10 +772,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         for name in names{
             continueNode.childNode(withName: name)?.removeFromParent()
         }
-        for layer in (view?.layer.sublayers)! {
-            if layer.name == "circleLayer" {
-                layer.removeFromSuperlayer()
+        if let layers = view?.layer.sublayers{
+            for layer in layers {
+                if layer.name == "circleLayer" {
+                    layer.removeFromSuperlayer()
+                }
             }
+        } else {
+            print("layer didnt work")
         }
         
     }

@@ -132,6 +132,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let monster3I = SKSpriteNode(imageNamed:  "redRing")
         let monster4I = SKSpriteNode(imageNamed:  "yellowRing")
         
+        
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
         editMonster(monster: monster1I, position: CGPoint(x: monster1I.size.width/2 + 16 , y: size.height - 2 * monster1I.size.height),name:"blueRing")
@@ -612,12 +613,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 self.gameNode.addChild(label)
                 timeOut()
                 gameNode.isPaused = false
-                movedOn = true
             }
         }
         func restartGame(){
             print("no thanks")
-            movedOn = true
+            
             continueGame = true
             //removing all children and actions
             gameNode.isPaused = false
@@ -774,11 +774,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //containes all the nodes of the continue screen
     var names = [String]()
     
-    //movedOn
-    var movedOn = false
     //adds nodes to screen
     func addContinueScreen() {
-        movedOn = false
         gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
         
         //transparent layer added

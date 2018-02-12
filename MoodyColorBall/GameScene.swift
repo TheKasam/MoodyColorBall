@@ -932,6 +932,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if continueGame == true{
             continueCircle()
             continueLabel()
+            animateCircle()
         } else {
             tryAgain()
         }
@@ -941,13 +942,18 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         fbIcon()
         starIcon()
         shareIcon()
-        animateCircle()
+        
         
     }
     
     func removeContinueScreen(){
         for name in names{
             childNode(withName: name)?.removeFromParent()
+        }
+        for layer in (view?.layer.sublayers)! {
+            if layer.name == "circleLayer" {
+                layer.removeFromSuperlayer()
+            }
         }
         
     }
@@ -974,6 +980,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         // Don't draw the circle initially
         circleLayer.strokeEnd = 0.0
+        
+        circleLayer.name = "circleLayer"
         
         // Add the circleLayer to the view's layer's sublayers
         view?.layer.addSublayer(circleLayer)

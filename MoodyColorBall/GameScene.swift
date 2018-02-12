@@ -833,19 +833,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             self.addChild(continueBar)
         }
         
-        func continueCircleBorder() {
-            let circle = SKShapeNode(circleOfRadius: 70)
-            circle.name = "bar"
-            circle.strokeColor = UIColor(red:0.29, green:0.56, blue:0.89, alpha:1.0)
-            circle.lineWidth = 5
-            
 
-            circle.position = CGPoint(x: size.width/2 , y: size.height/2)
-            circle.zPosition = 101
-            circle.name = "continueCirBorder"
-            names.append("continueCirBorder")
-            self.addChild(circle)
-        }
         
         func continueCircle() {
             let circle = SKShapeNode(circleOfRadius: 67)
@@ -942,7 +930,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         continueBar()
         
         if continueGame == true{
-//            continueCircleBorder()
             continueCircle()
             continueLabel()
         } else {

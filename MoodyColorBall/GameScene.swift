@@ -557,6 +557,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else if starIcon.contains(touchLocation){
             print("star touched")
         } else {
+            
+                if gameNode.isPaused == false{
+
+            
                 print("inital")
                 //logic to only start running once
                 if self.initalRun == false{
@@ -602,6 +606,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         self.initalRun = true
                     }
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
+            }
         }
         
         if let continueNode = continueNode.childNode(withName: "continueCir"){
@@ -682,12 +687,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else if starIcon.contains(touchLocation){
             print("star touched")
         } else {
+            if gameNode.isPaused == false{
             // 2 - Set up initial location of projectile
             //        let monster = SKSpriteNode(imageNamed: "monster")
             player.position = touchLocation
             player.position = CGPoint(x: touchLocation.x , y: size.height * 0.3)
-            
-            
+            }
         }
 
     }

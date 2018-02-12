@@ -568,7 +568,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else if starIcon.contains(touchLocation){
             print("star touched")
         } else {
-                print("inital ")
+                print("inital")
                 //logic to only start running once
                 if self.initalRun == false{
                         score = 0 //reseting score
@@ -598,7 +598,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 ]))
             
             
-                        run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
+                        gameNode.run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
             
                         //running block
                         let repeatBlock = SKAction.repeatForever(
@@ -608,7 +608,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 ]))
                         let wait2 = SKAction.wait(forDuration: 0.45)
             
-                        run(SKAction.sequence([wait2,repeatBlock]))
+                        gameNode.run(SKAction.sequence([wait2,repeatBlock]))
             
                         self.initalRun = true
                     }
@@ -633,7 +633,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             //removing all children and actions
             scene?.removeAllChildren()
             scene?.removeAllActions()
-            scene?.view?.isPaused = false
+            gameNode.isPaused = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                 
@@ -703,6 +703,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
         } else {
             gameNode.isPaused = true
+            
             let highScore = userDefault.integer(forKey: "highScore")
             if score > highScore{
                     userDefault.set(score, forKey: "highScore")
@@ -756,7 +757,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func removeContinueScreen(){
         for name in names{
-            gameNode.childNode(withName: name)?.removeFromParent()
+            continueNode.childNode(withName: name)?.removeFromParent()
         }
         for layer in (view?.layer.sublayers)! {
             if layer.name == "circleLayer" {

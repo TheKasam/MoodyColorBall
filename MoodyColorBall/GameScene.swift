@@ -155,9 +155,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     @objc func incSpeed(){
         
-        if self.ringSpeeed > 0.8{
+        if self.ringSpeeed > 1.0{
             self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
-            self.ringWaitDuration = self.ringWaitDuration - 0.072
+            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
+            print(self.ringWaitDuration)
         }
         print(self.ringSpeeed)
         
@@ -555,6 +556,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         monster4.run(SKAction.sequence([actionMove4, actionMoveDone]))
     }
     
+    func waitFunc(){
+        print(self.ringWaitDuration)
+        run(SKAction.wait(forDuration: self.ringWaitDuration))
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
 
@@ -594,7 +599,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
                         //starting game
                         let wait = SKAction.wait(forDuration: 1.1)
-            
+                    
                         let repeatRun = SKAction.repeatForever(
                             SKAction.sequence([
                                 SKAction.run(setBallProperty),
@@ -603,12 +608,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 SKAction.run(ring3),
                                 SKAction.run(ring4),
                                 SKAction.run(updateShuffleArray),
-                                SKAction.wait(forDuration: ringWaitDuration)
+                                SKAction.wait(forDuration: 1.3)
                                 ]))
 
                     
 
-//                        let speedIncreaser = SKAction.repeatForever(SKAction.run())
             
             
                         gameNode.run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))

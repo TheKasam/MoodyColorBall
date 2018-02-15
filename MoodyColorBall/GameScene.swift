@@ -155,8 +155,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     @objc func incSpeed(){
         
-        
-        self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+        if self.ringSpeeed > 0.8{
+            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+            self.ringWaitDuration = self.ringWaitDuration - 0.072
+        }
+        print(self.ringSpeeed)
         
         
     }
@@ -553,7 +556,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(incSpeed), userInfo: nil, repeats: true)
+        
 
         // 1 - Choose one of the touches to work with
         guard let touch = touches.first else {
@@ -575,6 +578,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 print("inital")
                 //logic to only start running once
                 if self.initalRun == false{
+                        self.gameTimer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(incSpeed), userInfo: nil, repeats: true)
+                    
                         score = 0 //reseting score
                         label.text = String(0)
                         self.gameNode.addChild(label)
@@ -628,6 +633,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             if continueNode.contains(touchLocation){
                 
                 print("continue")
+                
                 continueGame = false
                 removeContinueScreen()
                 self.gameNode.addChild(label)
@@ -639,8 +645,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //restarts game from start
         func restartGame(){
             print("no thanks")
-            
+            self.ringSpeeed = CGFloat(1.8)
+            self.ringWaitDuration = 1.3
+            gameTimer.invalidate()
+
+            print("reset speed")
+            print(self.ringSpeeed)
             continueGame = true
+            
             //removing all children and actions
             gameNode.isPaused = false
 
@@ -661,8 +673,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     }
                 }
             }
-            
-            
+            //bug if i dont
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                 
                 self.createHomeScreen()

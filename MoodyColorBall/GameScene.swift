@@ -620,6 +620,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 gameNode.isPaused = false
             }
         }
+        
+        //restarts game from start
         func restartGame(){
             print("no thanks")
             
@@ -713,6 +715,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             if score > highScore{
                     userDefault.set(score, forKey: "highScore")
             }
+            gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
             addContinueScreen()
             
         }
@@ -781,7 +784,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //adds nodes to screen
     func addContinueScreen() {
-        gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
+        
         
         //transparent layer added
         var colorStart = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
@@ -982,23 +985,33 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             ContinueScreen.animateCircle(frame: frame,view: view)
             
             func switchItems(){
-                self.continueNode.childNode(withName: "continueLabel")?.removeFromParent()
-                self.continueNode.childNode(withName: "continueCir")?.removeFromParent()
-                if let layers = self.view?.layer.sublayers{
-                    for layer in layers {
-                        if layer.name == "circleLayer" {
-                            layer.removeFromSuperlayer()
-                        }
-                    }
-                } else {
-                    print("layer didnt work")
-                }
                 
-                tryAgain()
+                if let scoreLbl = gameNode.childNode(withName: "label"){
+                    print("playing game")
+                } else {
+
+                    self.continueNode.childNode(withName: "continueLabel")?.removeFromParent()
+                    self.continueNode.childNode(withName: "continueCir")?.removeFromParent()
+                    if let layers = self.view?.layer.sublayers{
+                        for layer in layers {
+                            if layer.name == "circleLayer" {
+                                layer.removeFromSuperlayer()
+                            } }
+                        
+                    } else {
+                        print("layer didnt work")
+                    }
+                    tryAgain()
+                }
             }
             
             let wait = SKAction.wait(forDuration: 5.0)
+            
+
+
             continueNode.run(SKAction.sequence([wait,SKAction.run(switchItems)]))
+
+
             
             
 

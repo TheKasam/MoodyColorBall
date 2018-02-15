@@ -928,7 +928,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let noThanksLabel = SKSpriteNode(imageNamed: "NO THANKS")
             
             noThanksLabel.zPosition = 110
-            noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.25)
+            noThanksLabel.position = CGPoint(x: size.width/2 , y: size.height * 0.29)
             
             noThanksLabel.name = "noThanksLabel"
             names.append("noThanksLabel")
@@ -940,7 +940,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let fbIcon = SKSpriteNode(imageNamed: "facebookIcon")
             
             fbIcon.zPosition = 110
-            fbIcon.position = CGPoint(x: size.width/3 , y: size.height * 0.15)
+            fbIcon.position = CGPoint(x: size.width/3 , y: size.height * 0.18)
             
             fbIcon.name = "fbIcon"
             names.append("fbIcon")
@@ -951,7 +951,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let starIcon = SKSpriteNode(imageNamed: "starIcon")
 
             starIcon.zPosition = 110
-            starIcon.position = CGPoint(x: size.width/2 , y: size.height * 0.15)
+            starIcon.position = CGPoint(x: size.width/2 , y: size.height * 0.18)
 
             starIcon.name = "starIcon"
             names.append("starIcon")
@@ -962,7 +962,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             let shareIcon = SKSpriteNode(imageNamed: "shareIcon1")
 
             shareIcon.zPosition = 110
-            shareIcon.position = CGPoint(x: size.width/3 * 2 , y: size.height * 0.15)
+            shareIcon.position = CGPoint(x: size.width/3 * 2 , y: size.height * 0.18)
 
             shareIcon.name = "shareIcon"
             names.append("shareIcon")
@@ -978,6 +978,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         bestLbl()
         cbestLbl()
         continueBar()
+        noThanksLabel()
         
         if continueGame == true{
             continueCircle()
@@ -986,7 +987,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
             func switchItems(){
                 
-                if let scoreLbl = gameNode.childNode(withName: "label"){
+                if gameNode.childNode(withName: "label") != nil{
                     print("playing game")
                 } else {
 
@@ -1002,6 +1003,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         print("layer didnt work")
                     }
                     tryAgain()
+                    
                 }
             }
             
@@ -1016,11 +1018,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
 
         } else {
+            continueNode.childNode(withName: "noThanksLabel")?.removeFromParent()
             tryAgain()
         }
         
         
-        noThanksLabel()
+        
         fbIcon()
         starIcon()
         shareIcon()

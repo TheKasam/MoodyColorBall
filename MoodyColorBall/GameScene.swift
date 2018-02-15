@@ -633,7 +633,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             if continueNode.contains(touchLocation){
                 
                 print("continue")
-                
+                self.gameTimer.fire()
                 continueGame = false
                 removeContinueScreen()
                 self.gameNode.addChild(label)
@@ -742,6 +742,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     userDefault.set(score, forKey: "highScore")
             }
             gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
+            self.gameTimer.invalidate()
             addContinueScreen()
             
         }

@@ -20,10 +20,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var shuffledRingArray = ["blueRing","greenRing","redRing","yellowRing"]
     var score = 0
     var touch: UITouch?
-    let ringSpeeed = CGFloat(1.8)
+    var ringSpeeed = CGFloat(1.8)
+    var ringWaitDuration = 1.3
     let ringSpeeed2 = CGFloat(1.6)
     var initalRun = false
     var continueGame = true
+    var gameTimer: Timer!
     
     //game nodes
     let player = SKSpriteNode(imageNamed: "redBall")
@@ -149,6 +151,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         )
         
         homeNode.run(SKAction.sequence([repeatPointer]))
+    }
+    
+    @objc func incSpeed(){
+        
+        
+        self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+        
+        
     }
     
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
@@ -543,6 +553,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(incSpeed), userInfo: nil, repeats: true)
 
         // 1 - Choose one of the touches to work with
         guard let touch = touches.first else {
@@ -568,7 +579,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         label.text = String(0)
                         self.gameNode.addChild(label)
             
-                        //removing elements
+                        //removing home elements
                         touchBar.removeFromParent()
                         titleText.removeFromParent()
                         directionLbl.removeFromParent()
@@ -587,8 +598,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 SKAction.run(ring3),
                                 SKAction.run(ring4),
                                 SKAction.run(updateShuffleArray),
-                                SKAction.wait(forDuration: 1.3)
+                                SKAction.wait(forDuration: ringWaitDuration)
                                 ]))
+
+                    
+
+//                        let speedIncreaser = SKAction.repeatForever(SKAction.run())
             
             
                         gameNode.run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))

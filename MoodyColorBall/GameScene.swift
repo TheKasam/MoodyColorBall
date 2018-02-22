@@ -68,7 +68,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         //adding player data and physics
         player.userData = ["imageName" : "redBall"]
-        
+        player.name = "player"
         player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width / 2)
         player.physicsBody?.isDynamic = true
         player.physicsBody?.categoryBitMask = PhysicsCategory.Player
@@ -155,12 +155,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     @objc func incSpeed(){
         
-        if self.ringSpeeed > 1.0{
-            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
-            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
-            print(self.ringWaitDuration)
-        }
-        print(self.ringSpeeed)
+//        if self.ringSpeeed > 1.0{
+//            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+//            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
+//            print(self.ringWaitDuration)
+//        }
+//        print(self.ringSpeeed)
         
         
     }
@@ -737,6 +737,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             label.text = String(self.score)
+            let playerNode  = self.childNode(withName: "player")
+            let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7))
+            view?.layer.insertSublayer(pulseEffect, below: self.view?.layer)
             
         } else {
             gameNode.isPaused = true

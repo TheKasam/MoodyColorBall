@@ -47,6 +47,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     
     override func sceneDidLoad() {
+
+        
+        
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 

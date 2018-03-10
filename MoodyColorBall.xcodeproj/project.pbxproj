@@ -17,9 +17,11 @@
 		7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */; };
 		7369EEED2022EA3D007F9BC1 /* HomeViewContollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */; };
 		739259302023D3E7007FAA72 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392592F2023D3E7007FAA72 /* GameScene.swift */; };
+		BD87A7031DAFFDE798190EB8 /* Pods_MoodyColorBall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13B8A81841582A2DE27C450 /* Pods_MoodyColorBall.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5651A2A2355A470BBD96DC62 /* Pods-MoodyColorBall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodyColorBall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoodyColorBall/Pods-MoodyColorBall.debug.xcconfig"; sourceTree = "<group>"; };
 		7326393F203F239400AFDD7A /* LFTPulseAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFTPulseAnimation.swift; sourceTree = "<group>"; };
 		7366F2E020313C7500F7A2E6 /* ContinueScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueScreen.swift; sourceTree = "<group>"; };
 		7369EE9D202292B7007F9BC1 /* MoodyColorBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodyColorBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +34,8 @@
 		7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContollerViewController.swift; sourceTree = "<group>"; };
 		7392592F2023D3E7007FAA72 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		B13B8A81841582A2DE27C450 /* Pods_MoodyColorBall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodyColorBall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7BF1AA807417A0DD9EAED38 /* Pods-MoodyColorBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodyColorBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoodyColorBall/Pods-MoodyColorBall.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD87A7031DAFFDE798190EB8 /* Pods_MoodyColorBall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AE7433DD76F1CE50B36658E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5651A2A2355A470BBD96DC62 /* Pods-MoodyColorBall.debug.xcconfig */,
+				C7BF1AA807417A0DD9EAED38 /* Pods-MoodyColorBall.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7369EE94202292B7007F9BC1 = {
 			isa = PBXGroup;
 			children = (
 				7369EE9F202292B7007F9BC1 /* MoodyColorBall */,
 				7369EE9E202292B7007F9BC1 /* Products */,
+				6AE7433DD76F1CE50B36658E /* Pods */,
+				C826F882C2628EEA1C8C5135 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +95,14 @@
 			path = MoodyColorBall;
 			sourceTree = "<group>";
 		};
+		C826F882C2628EEA1C8C5135 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B13B8A81841582A2DE27C450 /* Pods_MoodyColorBall.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7369EEB5202292B7007F9BC1 /* Build configuration list for PBXNativeTarget "MoodyColorBall" */;
 			buildPhases = (
+				CA6731347FDEAC398E190E43 /* [CP] Check Pods Manifest.lock */,
 				7369EE99202292B7007F9BC1 /* Sources */,
 				7369EE9A202292B7007F9BC1 /* Frameworks */,
 				7369EE9B202292B7007F9BC1 /* Resources */,
+				3B43764EF692DD45276A61C5 /* [CP] Embed Pods Frameworks */,
+				50BCEC4B3125B5D2B031364E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,6 +172,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B43764EF692DD45276A61C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoodyColorBall/Pods-MoodyColorBall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50BCEC4B3125B5D2B031364E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoodyColorBall/Pods-MoodyColorBall-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA6731347FDEAC398E190E43 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoodyColorBall-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7369EE99202292B7007F9BC1 /* Sources */ = {
@@ -292,6 +370,7 @@
 		};
 		7369EEB6202292B7007F9BC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5651A2A2355A470BBD96DC62 /* Pods-MoodyColorBall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -307,6 +386,7 @@
 		};
 		7369EEB7202292B7007F9BC1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7BF1AA807417A0DD9EAED38 /* Pods-MoodyColorBall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

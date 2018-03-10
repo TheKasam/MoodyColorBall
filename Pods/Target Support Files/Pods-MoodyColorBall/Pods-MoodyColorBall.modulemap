@@ -1,0 +1,6 @@
+framework module Pods_MoodyColorBall {
+  umbrella header "Pods-MoodyColorBall-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -27,15 +27,15 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         skView.presentScene(scene)
         
         // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        
-        addBannerViewToView(bannerView)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.rootViewController = self
-        let request: GADRequest = GADRequest()
-        request.testDevices = [kGADSimulatorID]
-        bannerView.load(request)
-        bannerView.delegate = self
+//        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+//        
+//        addBannerViewToView(bannerView)
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.rootViewController = self
+//        let request: GADRequest = GADRequest()
+//        request.testDevices = [kGADSimulatorID]
+//        bannerView.load(request)
+//        bannerView.delegate = self
         //commenting code is good for health hu my name is bob
 
     }

@@ -36,6 +36,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         request.testDevices = [kGADSimulatorID]
         bannerView.load(request)
         bannerView.delegate = self
+        //commenting code is good for health hu my name is bob
 
     }
     

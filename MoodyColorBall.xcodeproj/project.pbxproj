@@ -14,8 +14,6 @@
 		7369EEAC202292B7007F9BC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAA202292B7007F9BC1 /* Main.storyboard */; };
 		7369EEAE202292B7007F9BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAD202292B7007F9BC1 /* Assets.xcassets */; };
 		7369EEB1202292B7007F9BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */; };
-		7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */; };
-		7369EEED2022EA3D007F9BC1 /* HomeViewContollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */; };
 		739259302023D3E7007FAA72 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392592F2023D3E7007FAA72 /* GameScene.swift */; };
 		BD87A7031DAFFDE798190EB8 /* Pods_MoodyColorBall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B13B8A81841582A2DE27C450 /* Pods_MoodyColorBall.framework */; };
 /* End PBXBuildFile section */
@@ -31,8 +29,6 @@
 		7369EEAD202292B7007F9BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7369EEB0202292B7007F9BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7369EEB2202292B7007F9BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
-		7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContollerViewController.swift; sourceTree = "<group>"; };
 		7392592F2023D3E7007FAA72 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B13B8A81841582A2DE27C450 /* Pods_MoodyColorBall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodyColorBall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7BF1AA807417A0DD9EAED38 /* Pods-MoodyColorBall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodyColorBall.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoodyColorBall/Pods-MoodyColorBall.release.xcconfig"; sourceTree = "<group>"; };
@@ -80,15 +76,13 @@
 		7369EE9F202292B7007F9BC1 /* MoodyColorBall */ = {
 			isa = PBXGroup;
 			children = (
-				7369EEA0202292B7007F9BC1 /* AppDelegate.swift */,
 				7369EEA8202292B7007F9BC1 /* GameViewController.swift */,
-				7369EEEC2022EA3D007F9BC1 /* HomeViewContollerViewController.swift */,
 				7392592F2023D3E7007FAA72 /* GameScene.swift */,
-				7326393F203F239400AFDD7A /* LFTPulseAnimation.swift */,
 				7366F2E020313C7500F7A2E6 /* ContinueScreen.swift */,
-				7369EEEA2022AA25007F9BC1 /* GameOverScene.swift */,
 				7369EEAA202292B7007F9BC1 /* Main.storyboard */,
 				7369EEAD202292B7007F9BC1 /* Assets.xcassets */,
+				7369EEA0202292B7007F9BC1 /* AppDelegate.swift */,
+				7326393F203F239400AFDD7A /* LFTPulseAnimation.swift */,
 				7369EEAF202292B7007F9BC1 /* LaunchScreen.storyboard */,
 				7369EEB2202292B7007F9BC1 /* Info.plist */,
 			);
@@ -230,9 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				739259302023D3E7007FAA72 /* GameScene.swift in Sources */,
-				7369EEEB2022AA25007F9BC1 /* GameOverScene.swift in Sources */,
 				7369EEA9202292B7007F9BC1 /* GameViewController.swift in Sources */,
-				7369EEED2022EA3D007F9BC1 /* HomeViewContollerViewController.swift in Sources */,
 				7366F2E120313C7500F7A2E6 /* ContinueScreen.swift in Sources */,
 				73263940203F239400AFDD7A /* LFTPulseAnimation.swift in Sources */,
 				7369EEA1202292B7007F9BC1 /* AppDelegate.swift in Sources */,

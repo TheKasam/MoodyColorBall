@@ -48,8 +48,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     override func sceneDidLoad() {
 
-        
-        
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 
@@ -93,33 +91,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         directionLbl.text = "Get the ball into the same colored ring!"
         directionLbl.fontSize = 18
         directionLbl.fontColor = SKColor.white
-        directionLbl.position = CGPoint(x: size.width/2, y: size.height * 0.21)
-
+        directionLbl.position = CGPoint(x: size.width/2, y: size.height * 0.23)
         
         //adding bar
-        touchBar.position = CGPoint(x: size.width/2, y: size.height * 0.19)
+        touchBar.position = CGPoint(x: size.width/2, y: size.height * 0.21)
 
-        
         //adding pointer
-        pointer.position = CGPoint(x: size.width - ((size.width - touchBar.size.width)/2), y: size.height * 0.17)
-        
+        pointer.position = CGPoint(x: size.width - ((size.width - touchBar.size.width)/2), y: size.height * 0.19)
         
         //adding icons
-        fbIcon.position = CGPoint(x: (size.width / 3) + 25, y: size.height * 0.10)
-        
-        
-        starIcon.position = CGPoint(x: (size.width / 3) * 2 - 25, y: size.height * 0.10)
-        
+        fbIcon.position = CGPoint(x: (size.width / 3) + 25, y: size.height * 0.12)
+        starIcon.position = CGPoint(x: (size.width / 3) * 2 - 25, y: size.height * 0.12)
         
         //adding titelText
         titleText.position = CGPoint(x: size.width/2, y: size.height * 0.6)
         
         //adding home items and initing monsters
-
         createHomeScreen()
-        
 
-        
     }
     
     func createHomeScreen(){
@@ -224,8 +213,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     func runPointer() {
         
         let actualDuration =  1.5
-        let actionMove = SKAction.move(to: CGPoint(x: ((size.width - touchBar.size.width)/2) , y: size.height * 0.17), duration: TimeInterval(actualDuration))
-        let actionMove2 = SKAction.move(to: CGPoint(x: size.width - ((size.width - touchBar.size.width)/2) , y: size.height * 0.17), duration: TimeInterval(actualDuration))
+        let actionMove = SKAction.move(to: CGPoint(x: ((size.width - touchBar.size.width)/2) , y: size.height * 0.19), duration: TimeInterval(actualDuration))
+        let actionMove2 = SKAction.move(to: CGPoint(x: size.width - ((size.width - touchBar.size.width)/2) , y: size.height * 0.19), duration: TimeInterval(actualDuration))
         pointer.run(SKAction.sequence([actionMove, actionMove2]))
         
         

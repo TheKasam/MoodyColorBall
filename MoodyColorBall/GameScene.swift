@@ -46,11 +46,47 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //user defaults
     let userDefault = UserDefaults.standard
     
+    //variables for updateloop
+    var delta: TimeInterval = TimeInterval(0)
+    var last_update_time: TimeInterval = TimeInterval(0)
+    
+    var started: Bool = false
+    var maxTime: TimeInterval = TimeInterval(1.3)
+    
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+        if started == false {
+            delta = TimeInterval(0)
+        } else if started == true {
+            delta += currentTime - last_update_time
+        }
+        
+        last_update_time = currentTime
+        
+        if delta >= maxTime {
+            print(delta, "bob")
+            mainActionRepeat()
+            delta = TimeInterval(0)
+        }
+        
+
+    }
+    
+    
+    func mainActionRepeat(){
+        setBallProperty()
+        ring1()
+        ring2()
+        ring3()
+        ring4()
+        updateShuffleArray()
+    }
+    
     
     override func sceneDidLoad() {
-        self.ringInterval -= self.delta
-        print("Delta")
-        print(self.ringInterval)
+        
+
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 
@@ -150,13 +186,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     @objc func incSpeed(){
         
-        if self.ringSpeeed > 1.0{
-            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
-            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
-            print(self.ringWaitDuration)
-        }
-        print(self.ringSpeeed)
-        
+//        if self.ringSpeeed > 1.0{
+//            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+//            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
+//            print(self.ringWaitDuration)
+//        }
+//        print(self.ringSpeeed)
+//
         
     }
     
@@ -604,9 +640,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 SKAction.run(updateShuffleArray),
                                 SKAction.wait(forDuration: 1.3)
                                 ]))
-                    
-            
-                        gameNode.run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
+                
+                        func startMain(){
+                            self.started = true
+                            mainActionRepeat()
+                        }
+                        gameNode.run(SKAction.sequence([SKAction.run(run1),wait,SKAction.run(startMain)]))
             
                         //running block
                         let repeatBlock = SKAction.repeatForever(

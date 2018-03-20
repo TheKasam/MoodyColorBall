@@ -26,6 +26,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var initalRun = false
     var continueGame = true
     var gameTimer: Timer!
+    var ringInterval: TimeInterval = TimeInterval(2)
     
     //game nodes
     let player = SKSpriteNode(imageNamed: "redBall")
@@ -47,7 +48,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     
     override func sceneDidLoad() {
-
+        self.ringInterval -= self.delta
+        print("Delta")
+        print(self.ringInterval)
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 
@@ -147,12 +150,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     @objc func incSpeed(){
         
-//        if self.ringSpeeed > 1.0{
-//            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
-//            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
-//            print(self.ringWaitDuration)
-//        }
-//        print(self.ringSpeeed)
+        if self.ringSpeeed > 1.0{
+            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
+            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
+            print(self.ringWaitDuration)
+        }
+        print(self.ringSpeeed)
         
         
     }
@@ -352,8 +355,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //makes ring sprites
     func ring1() {
-        
-        
+   
         // Create sprite
         let monster = SKSpriteNode(imageNamed:  self.shuffledRingArray[0])
         monster.userData = ["imageName" : self.shuffledRingArray[0]]
@@ -602,10 +604,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                                 SKAction.run(updateShuffleArray),
                                 SKAction.wait(forDuration: 1.3)
                                 ]))
-
                     
-
-            
             
                         gameNode.run(SKAction.sequence([SKAction.run(run1),wait,repeatRun]))
             

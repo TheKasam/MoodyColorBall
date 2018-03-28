@@ -49,12 +49,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //variables for updateloop
     var delta: TimeInterval = TimeInterval(0)
     var last_update_time: TimeInterval = TimeInterval(0)
-    
     var started: Bool = false
+    //control the sppen by changing this variable
     var maxTime: TimeInterval = TimeInterval(1.3)
     
-    
+    //function that calls the function that spans rings
+    //controls speed
     override func update(_ currentTime: TimeInterval) {
+        
         
         if started == false {
             delta = TimeInterval(0)
@@ -69,11 +71,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             mainActionRepeat()
             delta = TimeInterval(0)
         }
-        
-
     }
     
-    
+    //spawns rings and shuffels color array
     func mainActionRepeat(){
         setBallProperty()
         ring1()
@@ -86,7 +86,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     override func sceneDidLoad() {
         
-
         //making sure it exits. Default value seems to be zero
         userDefault.integer(forKey: "highScore")
 
@@ -101,8 +100,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         addChild(continueNode)
     }
     
-    
-    
     //did move to view
     override func didMove(to view: SKView) {
         
@@ -116,8 +113,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         player.physicsBody?.collisionBitMask = PhysicsCategory.None
         player.position = CGPoint(x: size.width/2, y: size.height * 0.3)
         player.physicsBody?.usesPreciseCollisionDetection = true
-
-        
         
         //creating score label
         label.text = String(score)
@@ -184,6 +179,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         homeNode.run(SKAction.sequence([repeatPointer]))
     }
     
+    //not in use
     @objc func incSpeed(){
         
 //        if self.ringSpeeed > 1.0{
@@ -711,7 +707,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2/10), execute: {
                 
                 self.createHomeScreen()
-                self.initalRun = false //so actions can run again
+                self.initalRun = false
+                self.started = false//so actions can run again
                 
             })
             print("done")
@@ -773,6 +770,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             
         } else {
             gameNode.isPaused = true
+            //pauses ring spawning function
+//            started = false
             
             let highScore = userDefault.integer(forKey: "highScore")
             if score > highScore{
@@ -1034,7 +1033,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
 
 
-        
         backGroundRect()
         gameOverLabel()
         scoreLbl()
@@ -1067,40 +1065,22 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         print("layer didnt work")
                     }
                     tryAgain()
-                    
                 }
             }
             
             let wait = SKAction.wait(forDuration: 5.0)
-            
-
 
             continueNode.run(SKAction.sequence([wait,SKAction.run(switchItems)]))
-
-
-            
-            
 
         } else {
             continueNode.childNode(withName: "noThanksLabel")?.removeFromParent()
             tryAgain()
         }
         
-        
-        
         fbIcon()
         starIcon()
         shareIcon()
         
-        
     }
-    
 
-    
-    
-    
-    
-    
 }
-
-

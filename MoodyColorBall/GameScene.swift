@@ -48,6 +48,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //variables for updateloop
     var delta: TimeInterval = TimeInterval(0)
+    var deltaForBlock: TimeInterval = TimeInterval(0)
     var last_update_time: TimeInterval = TimeInterval(0)
     var started: Bool = false
     //control the sppen by changing this variable
@@ -61,10 +62,14 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if gameNode.isPaused == true {
             last_update_time = currentTime
         } else {
+            
+            
             if started == false {
                 delta = TimeInterval(0)
+                deltaForBlock = TimeInterval(0.6)
             } else if started == true {
                 delta += currentTime - last_update_time
+                deltaForBlock += currentTime - last_update_time
             }
             
             last_update_time = currentTime
@@ -74,6 +79,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 mainActionRepeat()
                 delta = TimeInterval(0)
             }
+            if deltaForBlock >= maxTime {
+                print(deltaForBlock, "block spawned")
+                block()
+                deltaForBlock = TimeInterval(0)
+            }
+            
+            
         }
         
         
@@ -651,14 +663,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                         gameNode.run(SKAction.sequence([SKAction.run(run1),wait,SKAction.run(startMain)]))
             
                         //running block
-                        let repeatBlock = SKAction.repeatForever(
-                            SKAction.sequence([
-                                SKAction.run(block),
-                                SKAction.wait(forDuration: 1.3)
-                                ]))
+//                        let repeatBlock = SKAction.repeatForever(
+//                            SKAction.sequence([
+//                                SKAction.run(block),
+//                                SKAction.wait(forDuration: 1.3)
+//                                ]))
+
                         let wait2 = SKAction.wait(forDuration: 0.45)
-            
-                        gameNode.run(SKAction.sequence([wait2,repeatBlock]))
+
+                        gameNode.run(SKAction.sequence([wait2,SKAction.run(block)]))
             
                         self.initalRun = true
                     }

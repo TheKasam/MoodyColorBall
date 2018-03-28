@@ -58,19 +58,26 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         
-        if started == false {
-            delta = TimeInterval(0)
-        } else if started == true {
-            delta += currentTime - last_update_time
+        if gameNode.isPaused == true {
+            
+        } else {
+            if started == false {
+                delta = TimeInterval(0)
+            } else if started == true {
+                delta += currentTime - last_update_time
+            }
+            
+            last_update_time = currentTime
+            
+            if delta >= maxTime {
+                print(delta, "spawn ring")
+                mainActionRepeat()
+                delta = TimeInterval(0)
+            }
         }
         
-        last_update_time = currentTime
         
-        if delta >= maxTime {
-            print(delta, "bob")
-            mainActionRepeat()
-            delta = TimeInterval(0)
-        }
+
     }
     
     //spawns rings and shuffels color array

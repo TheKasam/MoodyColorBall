@@ -59,7 +59,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         
         if gameNode.isPaused == true {
-            
+            last_update_time = currentTime
         } else {
             if started == false {
                 delta = TimeInterval(0)
@@ -778,7 +778,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else {
             gameNode.isPaused = true
             //pauses ring spawning function
-//            started = false
             
             let highScore = userDefault.integer(forKey: "highScore")
             if score > highScore{

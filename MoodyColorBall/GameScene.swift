@@ -198,18 +198,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         homeNode.run(SKAction.sequence([repeatPointer]))
     }
     
-    //not in use
-    @objc func incSpeed(){
-        
-//        if self.ringSpeeed > 1.0{
-//            self.ringSpeeed = self.ringSpeeed - CGFloat(0.1)
-//            self.ringWaitDuration = abs(self.ringWaitDuration - (self.ringWaitDuration * self.ringWaitDuration) + 1.2 )
-//            print(self.ringWaitDuration)
-//        }
-//        print(self.ringSpeeed)
-//
-        
-    }
     
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
         monster.userData = ["imageName" : name]
@@ -628,7 +616,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 print("inital")
                 //logic to only start running once
                 if self.initalRun == false{
-                        self.gameTimer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(incSpeed), userInfo: nil, repeats: true)
+                    
                     
                         score = 0 //reseting score
                         label.text = String(0)

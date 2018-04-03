@@ -59,6 +59,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         addChild(homeNode)
         addChild(gameNode)
         addChild(continueNode)
+        let glow = SKEffectNode()
+        glow.addChild(SKSpriteNode(texture: SKTexture(imageNamed: "redBall")))
+        glow.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 40])
+        glow.shouldRasterize = true
+        player.addChild(glow)
     }
     
     
@@ -133,6 +138,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         player.physicsBody?.collisionBitMask = PhysicsCategory.None
         player.position = CGPoint(x: size.width/2, y: size.height * 0.3)
         player.physicsBody?.usesPreciseCollisionDetection = true
+        
         
         //creating score label
         label.text = String(score)
@@ -509,6 +515,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         // Create sprite
         let monster = SKSpriteNode(imageNamed: self.shuffledRingArray[3])
+//        monster.addGlow()
         
         
         monster.userData = ["imageName" : self.shuffledRingArray[3]]
@@ -812,6 +819,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7), color: ringColor)
         view?.layer.insertSublayer(pulseEffect, below: self.view?.layer)
     }
+    
+    var countTillChange: UInt32 = 3
+    func randomColorChange(){
+        
+        randomPlayerColor()
+        if countTillChange == 1 {
+            
+        }
+        else if countTillChange == 0 {
+            
+            countTillChange = arc4random_uniform(7) + 3 ;
+        }
+        countTillChange -= 1
+        
+        
+    }
+    
+    
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
         print("Hit")
         let imageName = monster.userData?["imageName"] as! String
@@ -820,9 +845,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             
-            if self.score % 4 == 0{
-                randomPlayerColor()
-            }
+            randomColorChange()
             pulseEffect()
             
             maxTime -= 0.05
@@ -1143,7 +1166,32 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         fbIcon()
         starIcon()
         shareIcon()
-        
+       
     }
+    
+}
 
+extension SKSpriteNode {
+    /// Initializes a textured sprite with a glow using an existing texture object.
+    convenience init(texture: SKTexture, glowRadius: CGFloat) {
+        self.init(texture: texture, color: .red, size: texture.size())
+        
+        let glow: SKEffectNode = {
+            let glow = SKEffectNode()
+            glow.addChild(SKSpriteNode(texture: texture))
+            glow.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": glowRadius])
+            glow.shouldRasterize = true
+            return glow
+        }()
+        
+        let glowRoot: SKNode = {
+            let node = SKNode()
+            node.name = "Glow"
+            node.zPosition = -1
+            return node
+        }()
+        
+        glowRoot.addChild(glow)
+        addChild(glowRoot)
+}
 }

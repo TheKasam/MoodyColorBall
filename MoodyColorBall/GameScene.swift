@@ -670,7 +670,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             if continueNode.contains(touchLocation){
                 
                 print("continue")
-                self.gameTimer.fire()
                 continueGame = false
                 removeContinueScreen()
                 self.gameNode.addChild(label)
@@ -684,7 +683,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             print("no thanks")
             self.ringSpeeed = CGFloat(1.8)
             self.ringWaitDuration = 1.3
-            gameTimer.invalidate()
 
             print("reset speed")
             print(self.ringSpeeed)

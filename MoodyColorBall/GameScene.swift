@@ -45,17 +45,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //user defaults
     let userDefault = UserDefaults.standard
     
-    //variables for updateloop
-    var delta: TimeInterval = TimeInterval(0)
-    var deltaForBlock: TimeInterval = TimeInterval(0)
-    var last_update_time: TimeInterval = TimeInterval(0)
-    var started: Bool = false
-    //control the sppen by changing this variable
-    var maxTime: TimeInterval = TimeInterval(1.3)
-    
-    
-    
-    
     override func sceneDidLoad() {
         
         //making sure it exits. Default value seems to be zero
@@ -71,6 +60,17 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         addChild(gameNode)
         addChild(continueNode)
     }
+    
+    
+    
+    //variables for updateloop
+    var delta: TimeInterval = TimeInterval(0)
+    var deltaForBlock: TimeInterval = TimeInterval(0)
+    var last_update_time: TimeInterval = TimeInterval(0)
+    var started: Bool = false
+    //control the sppen by changing this variable
+    var maxTime: TimeInterval = TimeInterval(1.3)
+    
     
     //function that calls the function that spans rings
     //controls speed
@@ -166,6 +166,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     func createHomeScreen(){
+        //resetting values
+        maxTime = TimeInterval(1.3)
+        player.userData = ["imageName" : "redBall"]
+        player.texture = SKTexture(imageNamed: "redBall")
+        
         self.homeNode.addChild(player)
         self.homeNode.addChild(directionLbl)
         self.homeNode.addChild(touchBar)
@@ -180,7 +185,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let monster3I = SKSpriteNode(imageNamed:  "redRing")
         let monster4I = SKSpriteNode(imageNamed:  "yellowRing")
         
-        
         let space = ((size.width - 32) - monster1I.size.width * 4)/3
         
         editMonster(monster: monster1I, position: CGPoint(x: monster1I.size.width/2 + 16 , y: size.height - 2 * monster1I.size.height),name:"blueRing")
@@ -188,7 +192,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         editMonster(monster: monster3I, position: CGPoint(x:  (monster1I.size.width * 5 / 2 + 16 + space * 2) , y: size.height - 2 * monster1I.size.height),name:"redRing")
         editMonster(monster: monster4I, position: CGPoint(x:   (monster1I.size.width * 7 / 2 + 16 + space * 3), y: size.height - 2 * monster1I.size.height),name:"yellowRing")
         //monstersnames
-
         
         let wait = SKAction.wait(forDuration: 3.0)
         
@@ -764,6 +767,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
 
     }
     
+    func randomPlayerColor() {
+        var randomInt = arc4random_uniform(4)
+        
+        if randomInt == 0 {
+            player.userData = ["imageName" : "redBall"]
+            player.texture = SKTexture(imageNamed: "redBall")
+        } else if randomInt == 1 {
+            player.userData = ["imageName" : "blueBall"]
+            player.texture = SKTexture(imageNamed: "blueBall")
+        } else if randomInt == 2 {
+            player.userData = ["imageName" : "greenBall"]
+            player.texture = SKTexture(imageNamed: "greenBall")
+        } else if randomInt == 3 {
+            player.userData = ["imageName" : "yellowBall"]
+            player.texture = SKTexture(imageNamed: "yellowBall")
+        }
+
+    }
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
         print("Hit")
         let imageName = monster.userData?["imageName"] as! String
@@ -771,9 +792,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
-            if self.score > 5{
-                player.texture = SKTexture(imageNamed: "blueBall")
+            if self.score % 2 == 0{
+                randomPlayerColor()
             }
+            maxTime -= 0.05
             label.text = String(self.score)
             let playerNode  = self.childNode(withName: "player")
             let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7))

@@ -768,26 +768,30 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     func randomPlayerColor() {
-        var randomInt = arc4random_uniform(4)
+        var randomInt = arc4random_uniform(5)
         
-        if randomInt == 0 {
+        if randomInt == 1 {
             player.userData = ["imageName" : "redBall"]
             player.texture = SKTexture(imageNamed: "redBall")
             
             
-        } else if randomInt == 1 {
+        } else if randomInt == 2 {
             player.userData = ["imageName" : "blueBall"]
             player.texture = SKTexture(imageNamed: "blueBall")
             
             
-        } else if randomInt == 2 {
+        } else if randomInt == 3 {
             player.userData = ["imageName" : "greenBall"]
             player.texture = SKTexture(imageNamed: "greenBall")
             
             
-        } else if randomInt == 3 {
+        } else if randomInt == 4 {
             player.userData = ["imageName" : "yellowBall"]
             player.texture = SKTexture(imageNamed: "yellowBall")
+            
+        } else {
+            player.userData = ["imageName" : "redBall"]
+            player.texture = SKTexture(imageNamed: "redBall")
             
         }
         
@@ -816,12 +820,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             
-            if self.score % 2 == 0{
+            if self.score % 4 == 0{
                 randomPlayerColor()
             }
             pulseEffect()
             
             maxTime -= 0.05
+            ringSpeeed -= 0.3
             label.text = String(self.score)
             
             let playerNode  = self.childNode(withName: "player")

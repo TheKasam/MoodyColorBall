@@ -27,11 +27,11 @@ class LFTPulseAnimation: CALayer {
         super.init(layer: layer)
     }
     
-    init(repeatCount: Float=Float.infinity, radius: CGFloat, position: CGPoint) {
+    init(repeatCount: Float=Float.infinity, radius: CGFloat, position: CGPoint, color:CGColor ) {
         super.init()
         self.contentsScale = UIScreen.main.scale
         self.opacity = 0.0
-        self.backgroundColor = UIColor(red:0.82, green:0.01, blue:0.11, alpha:1.0).cgColor
+        self.backgroundColor = color
         self.radius = radius;
         self.repetitions = repeatCount;
         self.position = position

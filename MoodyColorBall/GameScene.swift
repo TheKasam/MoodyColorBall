@@ -773,17 +773,40 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if randomInt == 0 {
             player.userData = ["imageName" : "redBall"]
             player.texture = SKTexture(imageNamed: "redBall")
+            
+            
         } else if randomInt == 1 {
             player.userData = ["imageName" : "blueBall"]
             player.texture = SKTexture(imageNamed: "blueBall")
+            
+            
         } else if randomInt == 2 {
             player.userData = ["imageName" : "greenBall"]
             player.texture = SKTexture(imageNamed: "greenBall")
+            
+            
         } else if randomInt == 3 {
             player.userData = ["imageName" : "yellowBall"]
             player.texture = SKTexture(imageNamed: "yellowBall")
+            
         }
-
+        
+        
+    }
+    
+    func pulseEffect(){
+        var ringColor = UIColor(red:0.82, green:0.01, blue:0.11, alpha:1.0).cgColor
+        if player.userData!["imageName"] as! String == "redBall" {
+            ringColor = UIColor(red:0.82, green:0.01, blue:0.11, alpha:1.0).cgColor
+        } else if player.userData!["imageName"] as! String == "blueBall" {
+            ringColor = UIColor(red:0.00, green:0.02, blue:1.00, alpha:1.0).cgColor
+        } else if player.userData!["imageName"] as! String == "greenBall" {
+            ringColor = UIColor(red:0.06, green:0.98, blue:0.00, alpha:1.0).cgColor
+        } else if player.userData!["imageName"] as! String == "yellowBall" {
+            ringColor = UIColor(red:0.99, green:1.00, blue:0.00, alpha:1.0).cgColor
+        }
+        let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7), color: ringColor)
+        view?.layer.insertSublayer(pulseEffect, below: self.view?.layer)
     }
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
         print("Hit")
@@ -792,14 +815,17 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
+            
             if self.score % 2 == 0{
                 randomPlayerColor()
             }
+            pulseEffect()
+            
             maxTime -= 0.05
             label.text = String(self.score)
+            
             let playerNode  = self.childNode(withName: "player")
-            let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7))
-            view?.layer.insertSublayer(pulseEffect, below: self.view?.layer)
+            
             
         } else {
             gameNode.isPaused = true

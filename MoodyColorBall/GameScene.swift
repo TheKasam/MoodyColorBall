@@ -25,7 +25,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     let ringSpeeed2 = CGFloat(1.6)
     var initalRun = false
     var continueGame = true
-    var gameTimer: Timer!
     var ringInterval: TimeInterval = TimeInterval(2)
     
     //game nodes
@@ -771,6 +770,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
+            if self.score > 5{
+                player.texture = SKTexture(imageNamed: "b")
+            }
             label.text = String(self.score)
             let playerNode  = self.childNode(withName: "player")
             let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7))
@@ -785,7 +787,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                     userDefault.set(score, forKey: "highScore")
             }
             gameNode.childNode(withName: "label")?.removeFromParent() //removes score label
-            self.gameTimer.invalidate()
+            
             addContinueScreen()
             
         }

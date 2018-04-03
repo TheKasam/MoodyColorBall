@@ -53,6 +53,25 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //control the sppen by changing this variable
     var maxTime: TimeInterval = TimeInterval(1.3)
     
+    
+    
+    
+    override func sceneDidLoad() {
+        
+        //making sure it exits. Default value seems to be zero
+        userDefault.integer(forKey: "highScore")
+
+        //physics settings
+        physicsWorld.gravity = CGVector.zero
+        physicsWorld.contactDelegate = self
+        //background color
+        backgroundColor = SKColor.black
+
+        addChild(homeNode)
+        addChild(gameNode)
+        addChild(continueNode)
+    }
+    
     //function that calls the function that spans rings
     //controls speed
     override func update(_ currentTime: TimeInterval) {
@@ -88,7 +107,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
         
         
-
+        
     }
     
     //spawns rings and shuffels color array
@@ -99,23 +118,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         ring3()
         ring4()
         updateShuffleArray()
-    }
-    
-    
-    override func sceneDidLoad() {
-        
-        //making sure it exits. Default value seems to be zero
-        userDefault.integer(forKey: "highScore")
-
-        //physics settings
-        physicsWorld.gravity = CGVector.zero
-        physicsWorld.contactDelegate = self
-        //background color
-        backgroundColor = SKColor.black
-
-        addChild(homeNode)
-        addChild(gameNode)
-        addChild(continueNode)
     }
     
     //did move to view
@@ -198,6 +200,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     
+    //adding properties to all 4 monsters
     func editMonster(monster: SKSpriteNode, position: CGPoint,name:String) {
         monster.userData = ["imageName" : name]
         monster.name = name
@@ -769,7 +772,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         if imageName.prefix(1) ==  playerImageName.prefix(1){
             self.score += 1
             if self.score > 5{
-                player.texture = SKTexture(imageNamed: "b")
+                player.texture = SKTexture(imageNamed: "blueBall")
             }
             label.text = String(self.score)
             let playerNode  = self.childNode(withName: "player")

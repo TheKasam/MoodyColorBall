@@ -20,8 +20,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var shuffledRingArray = ["blueRing","greenRing","redRing","yellowRing"]
     var score = 0
     var touch: UITouch?
+    //the one being userd
     var ringSpeeed = CGFloat(1.8)
     var ringWaitDuration = 1.3
+    //inital speed
     let ringSpeeed2 = CGFloat(1.6)
     var initalRun = false
     var continueGame = true
@@ -995,8 +997,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             randomColorChange()
             pulseEffect()
             
-            maxTime -= 0.05
-            ringSpeeed -= 0.3
+//            maxTime -= 0.05
+//            ringSpeeed -= 0.3
             label.text = String(self.score)
             
             let playerNode  = self.childNode(withName: "player")

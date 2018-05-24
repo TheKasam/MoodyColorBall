@@ -20,8 +20,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var shuffledRingArray = ["blueRing","greenRing","redRing","yellowRing"]
     var score = 0
     var touch: UITouch?
-    //the one being userd
-    var ringSpeeed = CGFloat(1.8)
+
     var ringWaitDuration = 1.3
     //inital speed
     let ringSpeeed2 = CGFloat(1.6)
@@ -76,8 +75,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var last_update_time: TimeInterval = TimeInterval(0)
     var started: Bool = false
     //control the sppen by changing this variable
-    var maxTime: TimeInterval = TimeInterval(1.3)
-    
+    var maxTime: TimeInterval = TimeInterval(1.0)
+    //the one being userd
+    var ringSpeeed = CGFloat(1.38)
     
     //function that calls the function that spans rings
     //controls speed
@@ -175,11 +175,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func createHomeScreen(){
         //resetting values
-        maxTime = TimeInterval(1.3)
+//        maxTime = TimeInterval(1.3)
         player.userData = ["imageName" : "redBall"]
         player.texture = SKTexture(imageNamed: "redBall")
         
-        self.homeNode.addChild(player)
+//        self.homeNode.addChild(player)
         self.homeNode.addChild(directionLbl)
         self.homeNode.addChild(touchBar)
         self.homeNode.addChild(pointer)
@@ -406,12 +406,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     }
     
     var flip = false
+    var test = true
     //makes ring sprites
     func ring1() {
    
         // Create sprite
         
-        if (false){
+        if (test){
             let monster = SKSpriteNode(imageNamed:  self.shuffledRingArray[0])
             flip = true
             monster.userData = ["imageName" : self.shuffledRingArray[0]]
@@ -474,7 +475,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func ring2() {
         
-        if (false){
+        if (test){
             // Create sprite
             let monster = SKSpriteNode(imageNamed: self.shuffledRingArray[1])
             monster.userData = ["imageName" : self.shuffledRingArray[1]]
@@ -549,7 +550,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func ring3() {
         
-        if (false){
+        if (test){
             // Create sprite
             let monster = SKSpriteNode(imageNamed: self.shuffledRingArray[2])
             monster.userData = ["imageName" : self.shuffledRingArray[2]]
@@ -624,7 +625,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     
     func ring4() {
         
-        if (false){
+        if (test){
             // Create sprite
             let monster = SKSpriteNode(imageNamed: self.shuffledRingArray[3])
             //        monster.addGlow()

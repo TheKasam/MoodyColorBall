@@ -403,35 +403,70 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
     }
     
+    var flip = false
     //makes ring sprites
     func ring1() {
    
         // Create sprite
-        let monster = SKSpriteNode(imageNamed:  self.shuffledRingArray[0])
-        monster.userData = ["imageName" : self.shuffledRingArray[0]]
         
-        monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
-        monster.physicsBody?.isDynamic = true // 2
-        monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
-        monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
-        monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+        if (false){
+            let monster = SKSpriteNode(imageNamed:  self.shuffledRingArray[0])
+            flip = true
+            monster.userData = ["imageName" : self.shuffledRingArray[0]]
+            
+            monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
+            monster.physicsBody?.isDynamic = true // 2
+            monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
+            monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
+            monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+            
+            
+            monster.position = CGPoint(x:   monster.size.width/2 + 16 , y: size.height + monster.size.height/2)
+            
+            // Add the monster to the scene
+            self.gameNode.addChild(monster)
+            
+            // Determine speed of the monster
+            let actualDuration =   ringSpeeed//
+            
+            
+            // Create the actions
+            let actionMove = SKAction.move(to: CGPoint(x: (monster.size.width/2 + 16) , y: 0), duration: TimeInterval(actualDuration))
+            
+            let actionMoveDone = SKAction.removeFromParent()
+            
+            
+            monster.run(SKAction.sequence([actionMove, actionMoveDone]))
+        } else {
+            let monster = SKSpriteNode(imageNamed:  "blueblur")
+            flip = false
+            monster.userData = ["imageName" : self.shuffledRingArray[0]]
+            
+            monster.physicsBody = SKPhysicsBody(rectangleOf: monster.size) // 1
+            monster.physicsBody?.isDynamic = true // 2
+            monster.physicsBody?.categoryBitMask = PhysicsCategory.Monster // 3
+            monster.physicsBody?.contactTestBitMask = PhysicsCategory.Player // 4
+            monster.physicsBody?.collisionBitMask = PhysicsCategory.None // 5
+            
+            
+            monster.position = CGPoint(x:   monster.size.width/2  , y: size.height + monster.size.height/2 - 16)
+            
+            // Add the monster to the scene
+            self.gameNode.addChild(monster)
+            
+            // Determine speed of the monster
+            let actualDuration =   ringSpeeed//
+            
+            
+            // Create the actions
+            let actionMove = SKAction.move(to: CGPoint(x: (monster.size.width/2 ) , y: 0), duration: TimeInterval(actualDuration))
+            
+            let actionMoveDone = SKAction.removeFromParent()
+            
+            
+            monster.run(SKAction.sequence([actionMove, actionMoveDone]))
+        }
         
-        
-        monster.position = CGPoint(x:   monster.size.width/2 + 16 , y: size.height + monster.size.height/2)
-        
-        // Add the monster to the scene
-        self.gameNode.addChild(monster)
-        
-        // Determine speed of the monster
-        let actualDuration =   ringSpeeed//random(min: CGFloat(2.0), max: CGFloat(4.0))
-        
-        // Create the actions
-        let actionMove = SKAction.move(to: CGPoint(x: (monster.size.width/2 + 16) , y: 0), duration: TimeInterval(actualDuration))
-        
-        let actionMoveDone = SKAction.removeFromParent()
-        
-        
-        monster.run(SKAction.sequence([actionMove, actionMoveDone]))
         
         }
     

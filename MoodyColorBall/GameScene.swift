@@ -816,7 +816,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         } else if player.userData!["imageName"] as! String == "yellowBall" {
             ringColor = UIColor(red:0.99, green:1.00, blue:0.00, alpha:1.0).cgColor
         }
-        let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:100, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7), color: ringColor)
+        let pulseEffect = LFTPulseAnimation(repeatCount: 1, radius:240, position: CGPoint(x:  self.player.position.x , y:  size.height * 0.7), color: ringColor)
         view?.layer.insertSublayer(pulseEffect, below: self.view?.layer)
     }
     

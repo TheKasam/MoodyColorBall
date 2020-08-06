@@ -5,7 +5,7 @@ Moody Color Ball is a iOS Game. You have to get the ball into the ring thats of 
 ## Features
 Multiple screens (Home, Game, and Continue), Animations, UserDefaults, Sprite Interactions (Sprite Kit) and SKScene and SKPhysics. App  works on the latest version of XCode
 
-## Demo
+## Demo (gif)
 
 ![](Moody.gif)
 

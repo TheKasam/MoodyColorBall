@@ -849,7 +849,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             pulseEffect()
             
             maxTime -= 0.05
-            ringSpeeed -= 0.3
+            ringSpeeed -= 0.05
             label.text = String(self.score)
             
             let playerNode  = self.childNode(withName: "player")
